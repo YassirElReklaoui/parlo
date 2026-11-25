@@ -1,0 +1,183 @@
+{
+  "format": "parlo-personal-profile",
+  "schemaVersion": 1,
+  "appVersion": 231,
+  "exportedAt": null,
+  "profile": {
+    "name": "",
+    "xp": 0,
+    "streak": 0,
+    "last": "",
+    "day": {},
+    "les": {},
+    "w": {},
+    "talk": {},
+    "votes": {},
+    "acc": [
+      0,
+      0
+    ],
+    "perfect": 0,
+    "seen": false,
+    "badges": {},
+    "cfg": {
+      "lives": 5,
+      "goal": 30,
+      "hint": "en",
+      "snd": true,
+      "hap": true,
+      "auto": true,
+      "rate": 0.9,
+      "theme": "light",
+      "acc": "#0E8A4B",
+      "fs": 1,
+      "conf": true,
+      "motion": true,
+      "typing": true,
+      "listening": true,
+      "tips": true,
+      "subs": [],
+      "ocean": 1
+    },
+    "gems": 0,
+    "freeze": 0,
+    "exams": 0,
+    "chests": 0,
+    "lis": 0,
+    "wri": 0,
+    "mine": [],
+    "own": {
+      "acc": [],
+      "av": []
+    },
+    "av": "",
+    "bs": 0,
+    "sec": {},
+    "ue": {},
+    "lvx": {},
+    "mig101": 1,
+    "pl": {},
+    "planMin": 20,
+    "sv": [],
+    "lt": 0,
+    "gp": 0,
+    "mw": [],
+    "fav": [],
+    "best": {},
+    "nt": {},
+    "lg": 5,
+    "dc": {},
+    "xs": {},
+    "plStudio": {
+      "schema": 3,
+      "mastery": {},
+      "events": [],
+      "mistakes": [],
+      "reviews": {},
+      "conversations": [],
+      "assessmentHistory": [],
+      "planMinutes": 15,
+      "history": [],
+      "daily": {},
+      "backupAt": null,
+      "v187": {
+        "journal": [],
+        "missions": [],
+        "portfolio": [],
+        "planDone": {},
+        "planStarted": {},
+        "skillGoals": {},
+        "prefs": {},
+        "readings": [],
+        "conversationRetries": {}
+      },
+      "v194": {
+        "schema": 1,
+        "opened": [],
+        "wordQuizzes": {},
+        "readingHistory": [],
+        "manualSkillChecks": [],
+        "writingReviews": [],
+        "practiceLog": [],
+        "dailySnapshot": {},
+        "prefs": {}
+      }
+    },
+    "schemaVersion": 4,
+    "parlo205": {
+      "schema": 1,
+      "reviews": {},
+      "conversationAttempts": [],
+      "coach": {
+        "focus": "auto"
+      },
+      "activity": {},
+      "passport": [],
+      "quality": {
+        "lastAudit": 0
+      }
+    },
+    "parlo206": {
+      "schema": 1,
+      "startedAt": 1795647030324,
+      "evidence": [],
+      "conversation": [],
+      "coach": {
+        "focus": "auto"
+      },
+      "diagnostics": [],
+      "storyNotes": []
+    },
+    "parlo207": {
+      "schema": 1,
+      "intentHistory": [],
+      "grammarHistory": [],
+      "activeDays": {}
+    },
+    "parlo214": {
+      "schema": 1,
+      "recovery": [],
+      "grammarChecks": [],
+      "conversationState": [],
+      "assessments": [],
+      "retention": [],
+      "lastCoach": {},
+      "storyJourneys": []
+    },
+    "parlo220": {
+      "schema": 1,
+      "exposures": {},
+      "assessmentExposures": {},
+      "writingDrafts": []
+    },
+    "parlo221": {
+      "schema": 1,
+      "lifetime": {},
+      "practiceSessions": [],
+      "readingRecords": [],
+      "writingRevisions": [],
+      "examPlans": [],
+      "learningTasks": [],
+      "answers": [],
+      "clock": {
+        "activeMs": 0,
+        "day": "",
+        "sessions": []
+      },
+      "assessmentSeen": {},
+      "initialized": true,
+      "lastSeen": null,
+      "dialogue": {}
+    },
+    "dailyWordHistory": {
+      "2026-11-25": "azi.13"
+    },
+    "qd": {
+      "d": "2026-11-25",
+      "c": 0,
+      "s": 0,
+      "claim": 0
+    },
+    "lm": {}
+  }
+}
