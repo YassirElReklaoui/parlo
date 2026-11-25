@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "Parlo - Learn Italian",
+  "short_name": "Parlo",
+  "description": "Italian language learning with offline study, grammar, conversations, and adaptive review",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B6B3A",
+  "theme_color": "#0B6B3A",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "version": "231"
+}
