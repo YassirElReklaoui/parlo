@@ -5806,6 +5806,11 @@ body .pgb svg,body .ovb svg{pointer-events:none;color:#fff!important;stroke:curr
 body .pgb:active,body .ovb:active{transform:translateY(.15rem);box-shadow:none}
 body .ovb{width:auto!important;min-width:2.9rem;padding:0 1rem 0 .6rem!important;border-radius:1.5rem!important;grid-auto-flow:column;gap:.15rem;font-weight:800}
 body .ovb svg{width:1.4rem;height:1.4rem}
+html.hitbk,html.hitbk *{cursor:pointer!important}
+body .pgb,body .pgb *,body .ovb,body .ovb *{cursor:pointer!important}
+body .pgh{z-index:20}
+body .pgb,body .ovb{z-index:21}
+body #top:before,body #top:after{pointer-events:none}
 /* Parlo responsive layer. Everything is inside min-width rules, so phones (under 700px) never read it. */
 @media(min-width:700px){
 body #app{max-width:none!important}
@@ -5913,6 +5918,7 @@ body.dk #top .p11-search-trigger{width:13rem!important}
 /* back buttons: activate from the pointer position, even if something invisible sits on top of the button */
 (function(){let dn=null,last=0;
 const hit=(x,y)=>{for(const b of document.querySelectorAll('.pgb,.ovb')){const r=b.getBoundingClientRect();if(r.width&&x>=r.left-6&&x<=r.right+6&&y>=r.top-6&&y<=r.bottom+6)return b}return null};
+let on=false;document.addEventListener('mousemove',e=>{const h=!!hit(e.clientX,e.clientY);if(h!==on){on=h;document.documentElement.classList.toggle('hitbk',h)}},{passive:true,capture:true});
 document.addEventListener('pointerdown',e=>{dn=(e.button>0)?null:{b:hit(e.clientX,e.clientY),x:e.clientX,y:e.clientY}},true);
 document.addEventListener('pointerup',e=>{const d=dn;dn=null;if(!d||!d.b||!d.b.isConnected)return;if(Math.abs(e.clientX-d.x)>12||Math.abs(e.clientY-d.y)>12)return;if(hit(e.clientX,e.clientY)!==d.b)return;d.b.click();last=Date.now()},true);
 document.addEventListener('click',e=>{if(Date.now()-last<700){e.stopImmediatePropagation();e.preventDefault()}},true);
