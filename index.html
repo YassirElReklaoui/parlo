@@ -5722,7 +5722,7 @@ parlo12Listen=function(button,text){
 </script>
 <script>
 /* Parlo public fixes: update flow, storage persistence, backup reminder, build label. */
-const PARLO_BUILD='2026-11-26-d';
+const PARLO_BUILD='2026-11-26-e';
 function parloIsIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
 function parloLS(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 function parloBuildLine(){const p=parloLS('parlo-persist');return 'Parlo build '+PARLO_BUILD+' · '+(p==='1'?'Storage protected by browser':p==='0'?'Storage not guaranteed, keep a backup':'Storage status unknown')}
