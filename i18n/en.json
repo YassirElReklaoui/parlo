@@ -2955,6 +2955,8 @@
   "lit_grammar": "Grammar",
   "lit_search_ph": "Search lessons, words, verbs",
   "lit_irregular": "irregular",
-  "lit_regular": "regular"
+  "lit_regular": "regular",
+  "lit_review_btn": "Review",
+  "lit_tools": "Tools"
  }
 }
