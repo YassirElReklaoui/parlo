@@ -302,7 +302,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const ic=(n,s=24,cls='')=>`<svg class="ic ${cls}" viewBox="0 0 24 24" style="width:${s/16}rem;height:${s/16}rem">${IO[n]||IO.sparkles}</svg>`;
+const ic=(n,s=24,cls='')=>`<svg class="ic ${cls}" data-ui-icon="${n}" viewBox="0 0 24 24" style="width:${s/16}rem;height:${s/16}rem">${IO[n]||IO.sparkles}</svg>`;
 const icf=(n,s=24,cls='')=>IF[n]?`<svg class="ic f ${cls}" viewBox="0 0 24 24" style="width:${s/16}rem;height:${s/16}rem">${IF[n]}</svg>`:ic(n,s,cls);
 const mk=(s)=>s.trim().split('\n').map(l=>{const p=l.split('|');return{it:p[0],i:p[1],en:p[2],fr:p[3],ar:p[4]}});
 const UNITS=__D.g("UNITS#1");
@@ -4576,6 +4576,8 @@ try{view()}catch(e){console.warn(e)}
     if(lang==='en')return null;
     if(Object.prototype.hasOwnProperty.call(dictionary,v))return dictionary[v];
     if(protectedIT.has(v))return null;
+    const compact=v.replace(/\s+/g,' ').replace(/^[·•]+\s*/,'').replace(/[.!:]+$/,'').trim();
+    if(compact!==v&&Object.prototype.hasOwnProperty.call(dictionary,compact))return dictionary[compact];
     const indirect=LOW[lang][v.toLocaleLowerCase('en')];if(indirect!==undefined)return indirect;
     const lead=v.match(/^([·•:]\s*)(.+)$/);
     if(lead){const translated=lookup(lead[2]);if(translated!==null)return lead[1]+translated;}
@@ -4615,10 +4617,11 @@ try{view()}catch(e){console.warn(e)}
       for(const [key,val] of Object.entries(T[k])){
         if(/\{\d+\}/.test(key)){
           const pat=key.split(/(\{\d+\})/g).map(x=>/^\{\d+\}$/.test(x)?'(.+?)':x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('');
-          PAT[k].push([new RegExp('^'+pat+'$'),val]);
+          PAT[k].push([new RegExp('^'+pat+'$'),val,key.replace(/\{\d+\}/g,'').length]);
         }else LOW[k][key.toLocaleLowerCase('en')]=val;
       }
     });
+    for(const k of Object.keys(PAT))PAT[k].sort((a,b)=>b[2]-a[2]);
     if(data?.registries){
       for(const unit of data.registries.UNITS||[]){protectedIT.add(unit.it);for(const w of unit.w||[])protectedIT.add(w.it);for(const phrase of unit.p||[])protectedIT.add(phrase[0]);}
       for(const v of data.registries.VERBS||[])protectedIT.add(v.inf);
@@ -4640,6 +4643,12 @@ html[dir="rtl"] input,html[dir="rtl"] textarea{direction:auto}
 html[dir="rtl"] .word,html[dir="rtl"] .v187-wodword,html[dir="rtl"] .v187-wodtranslation,html[dir="rtl"] .bub,html[dir="rtl"] .ti,html[dir="rtl"] .puc-copy{unicode-bidi:plaintext}
 html[dir="rtl"] .hero .row1,html[dir="rtl"] .wl,html[dir="rtl"] .set .row{direction:rtl}
 html[dir="rtl"] .pl-studio,html[dir="rtl"] .modal{direction:rtl}
+/* SVG chevrons are drawn pointing right in source; mirror in Arabic UI.
+   This also mirrors back arrows to preserve physical navigation direction. */
+html[dir="rtl"] svg.ic:is([data-ui-icon="chevron-right"],[data-ui-icon="chevron-left"],[data-ui-icon="arrow-right"],[data-ui-icon="arrow-left"],[data-ui-icon="arrow-narrow-right"],[data-ui-icon="arrow-narrow-left"]){transform:scaleX(-1)}
+html[dir="rtl"] .pgh .sub,html[dir="rtl"] .card .sub{text-align:right!important}
+html[dir="rtl"] [data-i18n-ignore][dir="ltr"],html[dir="rtl"] [lang="it"]{direction:ltr;unicode-bidi:isolate}
+
 </style>
 <script id="parlo-loader">
 /* Parlo content loader. The app code ships as inert text blocks; they run only after the content file has loaded.
