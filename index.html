@@ -5910,6 +5910,13 @@ body.dk #top .p11-search-trigger{width:13rem!important}
 }
 </style>
 <script id="dk-js">
+/* back buttons: activate from the pointer position, even if something invisible sits on top of the button */
+(function(){let dn=null,last=0;
+const hit=(x,y)=>{for(const b of document.querySelectorAll('.pgb,.ovb')){const r=b.getBoundingClientRect();if(r.width&&x>=r.left-6&&x<=r.right+6&&y>=r.top-6&&y<=r.bottom+6)return b}return null};
+document.addEventListener('pointerdown',e=>{dn=(e.button>0)?null:{b:hit(e.clientX,e.clientY),x:e.clientX,y:e.clientY}},true);
+document.addEventListener('pointerup',e=>{const d=dn;dn=null;if(!d||!d.b||!d.b.isConnected)return;if(Math.abs(e.clientX-d.x)>12||Math.abs(e.clientY-d.y)>12)return;if(hit(e.clientX,e.clientY)!==d.b)return;d.b.click();last=Date.now()},true);
+document.addEventListener('click',e=>{if(Date.now()-last<700){e.stopImmediatePropagation();e.preventDefault()}},true);
+})();
 /* Parlo responsive layer (desktop shell). Runs only at 1100px and wider; phones and tablets keep the normal render. */
 (function(){
 const mq=matchMedia('(min-width:1100px)');
