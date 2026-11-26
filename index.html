@@ -5787,6 +5787,13 @@ window.addEventListener('load',()=>setTimeout(parloBackupNudge,6000));
 try{if(typeof topbar==='function'&&document.getElementById('top'))topbar()}catch(e){console.warn('topbar',e)}
 </script>
 <style id="dk-css">
+/* toast redesign (all sizes) */
+@keyframes dkToast{from{opacity:0;transform:translate(-50%,-.8rem) scale(.96)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+body .toast{background:#1d2b27!important;color:#fff!important;padding:.75rem 1.1rem .75rem .8rem!important;border-radius:1.1rem!important;gap:.65rem!important;font-weight:700!important;font-size:.9rem!important;line-height:1.25;text-align:left!important;box-shadow:0 .7rem 1.8rem rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.08)!important;border-left:.28rem solid var(--g,#1a9e5c)!important;animation:dkToast .28s ease-out!important;width:max-content;max-width:min(88%,26rem)!important;top:calc(env(safe-area-inset-top) + 5.2rem)!important}
+body .toast svg{flex:none;width:1.9rem!important;height:1.9rem!important;padding:.38rem;box-sizing:border-box;border-radius:.7rem;background:rgba(255,255,255,.14);color:#fff!important;stroke:currentColor}
+body .toast span{min-width:0}
+body.night .toast{background:#f1f7f4!important;color:#10211c!important;box-shadow:0 .7rem 1.8rem rgba(0,0,0,.5)!important}
+body.night .toast svg{background:rgba(16,33,28,.1);color:#10211c!important}
 /* Parlo responsive layer. Everything is inside min-width rules, so phones (under 700px) never read it. */
 @media(min-width:700px){
 body #app{max-width:none!important}
@@ -5859,13 +5866,16 @@ body.dk .dk-chap{min-width:0;display:flex;flex-direction:column;background:var(-
 body.dk .dk-chap>.unit{margin:0!important;border-radius:0!important;box-shadow:none!important;max-width:100%}
 body.dk .dk-chap>.trail{margin:0!important;overflow:hidden;max-width:100%}
 /* ME */
-body.dk[data-tab="me"] #main .view{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem 1.6rem;align-items:start;padding-top:.8rem}
-body.dk[data-tab="me"] #main .view>*{min-width:0;margin-left:0!important;margin-right:0!important}
-body.dk[data-tab="me"] #main .view>.hero,body.dk[data-tab="me"] #main .view>.p221-quick,body.dk[data-tab="me"] #main .view>.grid2,body.dk[data-tab="me"] #main .view>.mg{grid-column:1/-1}
+body.dk[data-tab="me"] #main .view{display:block;column-count:2;column-gap:1.6rem;padding-top:.8rem;max-width:64rem}
+body.dk[data-tab="me"] #main .view>*{min-width:0;margin-left:0!important;margin-right:0!important;break-inside:avoid;box-sizing:border-box}
+body.dk[data-tab="me"] #main .view>.hero,body.dk[data-tab="me"] #main .view>.p221-quick,body.dk[data-tab="me"] #main .view>.grid2{column-span:all}
+body.dk[data-tab="me"] #main .view>.p221-quick,body.dk[data-tab="me"] #main .view>.grid2{margin-bottom:1rem!important}
 body.dk[data-tab="me"] #main .view>.grid2{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))!important}
-body.dk[data-tab="me"] #main .view>.mg{display:block;column-count:2;column-gap:1.6rem}
-body.dk[data-tab="me"] #main .view>.mg>*{break-inside:avoid;margin-bottom:1rem}
+body.dk[data-tab="me"] #main .view>.mg{display:contents}
+body.dk[data-tab="me"] #main .view>.mg>*{break-inside:avoid;margin-bottom:1rem;margin-left:0!important;margin-right:0!important}
 body.dk[data-tab="me"] #main .view>.mg>:not(.grp):not(.p13-language){break-after:avoid;margin-bottom:.4rem}
+body.dk[data-tab="me"] #main .view>h2{break-after:avoid;margin:.9rem 0 .5rem!important}
+body.dk[data-tab="me"] #main .view>.btn{width:100%!important;margin-top:.6rem!important}
 body.dk[data-tab="me"] #main .view>.hero{padding:1.8rem 2.2rem!important;border-radius:2rem!important;box-shadow:0 .8rem 1.8rem rgba(10,110,70,.18)!important}
 /* EXPLORE / SPEAK / PRACTICE / SETTINGS */
 body.dk[data-tab="learn"] #main .view,body.dk[data-tab="talk"] #main .view{padding-top:.8rem;column-gap:1.2rem;row-gap:.8rem}
