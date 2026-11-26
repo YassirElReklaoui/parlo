@@ -29,7 +29,7 @@ Some browser-dependent capabilities, including speech playback and recognition, 
 
 ## 📱 Try or install Parlo
 
-**Online:** [Open Parlo](https://YOUR-USERNAME.github.io/parlo/)
+**Online:** [Open Parlo](https://yassirelreklaoui.github.io/parlo/)
 
 > Replace `YOUR-USERNAME` and `YOUR-REPOSITORY` with your GitHub Pages account and repository name after publishing.
 
