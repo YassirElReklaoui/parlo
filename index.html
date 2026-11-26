@@ -4507,6 +4507,60 @@ const st=document.createElement('style');st.textContent='[data-p231][dir=ltr]{un
 obs.observe(document.body,{childList:true,subtree:true});
 q.add(document.body);requestAnimationFrame(flush);
 })();
+
+/* ===== p241: Me page polish (stat cards, hero, chips, progress list) ===== */
+(function(){
+const css=`
+#main .view>.hero{padding:1.15rem 1.1rem 1.2rem}
+#main .view>.hero .row1{display:flex;align-items:center;gap:1rem}
+#main .view>.hero .row1>div{min-width:0;text-align:start}
+#main .view>.hero .row1 svg.mascot{flex:none;width:5.2rem;height:auto}
+#main .view>.hero h1{margin:0 0 .15rem;font-size:1.5rem;line-height:1.2;overflow-wrap:anywhere}
+#main .view>.hero p{margin:0;font-weight:800;font-size:.86rem;opacity:.92}
+#main .view>.hero .bar{height:.65rem!important;border-radius:1rem;background:rgba(255,255,255,.28);overflow:hidden;margin-top:.7rem!important}
+#main .view>.hero .bar i{display:block;height:100%;border-radius:1rem;background:#fff}
+.p221-quick{gap:.55rem!important;margin:.8rem .875rem .3rem!important}
+.p221-quick button{flex-direction:column;gap:.4rem!important;padding:.7rem .3rem!important;min-height:4.4rem!important;border:1px solid var(--line)!important;border-radius:1.2rem!important;box-shadow:0 .2rem 0 var(--line);text-align:center;line-height:1.25}
+.p221-quick button:active{transform:translateY(.12rem);box-shadow:0 .05rem 0 var(--line)}
+.p221-quick button svg{width:1.4rem!important;height:1.4rem!important;box-sizing:content-box;padding:.5rem;border-radius:.85rem;background:color-mix(in srgb,var(--g) 15%,var(--card));color:var(--g)}
+.p221-quick button:nth-child(2) svg{background:color-mix(in srgb,var(--y) 28%,var(--card));color:var(--yd)}
+.p221-quick button:nth-child(3) svg{background:color-mix(in srgb,var(--r) 14%,var(--card));color:var(--r)}
+body .grid2.me-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;margin:.7rem .875rem 0}
+body .grid2.me-stats .stat.me-st{flex-direction:row;align-items:center;gap:.75rem;padding:.8rem .85rem;font-size:1.5rem;line-height:1.05;min-width:0;border:1px solid var(--line)!important;box-shadow:var(--sh)!important}
+.me-st .me-sb{flex:none;width:2.9rem;height:2.9rem;border-radius:1rem;display:grid;place-items:center;background:color-mix(in srgb,var(--g) 15%,var(--card));color:var(--g)}
+.me-st .me-sb svg{width:1.6rem;height:1.6rem}
+.me-st.s1 .me-sb{background:color-mix(in srgb,var(--y) 28%,var(--card));color:var(--yd)}
+.me-st.s2 .me-sb{background:color-mix(in srgb,var(--r) 14%,var(--card));color:var(--r)}
+.me-st.s3 .me-sb{background:color-mix(in srgb,var(--gd) 18%,var(--card));color:var(--gd)}
+body.night .me-st.s3 .me-sb{color:var(--ink)}
+.me-st .me-sv{min-width:0;display:flex;flex-direction:column;gap:.2rem;text-align:start;color:var(--ink)}
+.me-st .me-sv b{font-size:1.5rem;font-weight:900;line-height:1.05;color:var(--ink)}
+.me-st .me-sv b span{font-size:.85rem!important;color:var(--mut);opacity:1!important;font-weight:800}
+body .me-st .me-sv small{display:block;color:var(--mut)!important;opacity:1!important;font-size:.76rem;font-weight:800;line-height:1.25;overflow-wrap:anywhere}
+.mg{margin:0 .875rem}.me-ico.t1{background:color-mix(in srgb,var(--g) 22%,var(--card));color:var(--gd)}.me-ico.t2{background:color-mix(in srgb,var(--gd) 16%,var(--card));color:var(--gd)}body.night .me-ico.t1,body.night .me-ico.t2{color:var(--ink)}
+.mg h3{margin:1.4rem .5rem .6rem;font-size:1rem;font-weight:900;color:var(--ink);text-transform:none;letter-spacing:0;text-align:start;display:flex;align-items:center;gap:.5rem}
+.mg h3::before{content:"";width:.28rem;height:1.05rem;border-radius:1rem;background:var(--g);flex:none}
+.mg .grp{border:1px solid var(--line)}
+.mg .r{text-align:start;padding:.75rem .9rem;gap:.85rem}
+.mg .r .ib{width:2.6rem;height:2.6rem;border-radius:.95rem;background:color-mix(in srgb,var(--g) 15%,var(--card))}
+.mg .r:nth-child(4n+2) .ib{background:color-mix(in srgb,var(--y) 28%,var(--card));color:var(--yd)}
+.mg .r:nth-child(4n+3) .ib{background:color-mix(in srgb,var(--r) 14%,var(--card));color:var(--r)}
+.mg .r:nth-child(4n+4) .ib{background:color-mix(in srgb,var(--gd) 18%,var(--card));color:var(--gd)}
+.mg .r span.t{text-align:start}
+#main .view>h2{margin:1.4rem .875rem .6rem;font-size:1.05rem;font-weight:900;text-align:start}
+`;
+const st=document.createElement('style');st.id='p241-style';st.textContent=css;document.head.appendChild(st);
+const _vMe241=vMe;vMe=function(){_vMe241();try{
+ const g=document.querySelector('#main .view>.grid2');if(!g||g.classList.contains('me-stats'))return;
+ g.classList.add('me-stats');
+ [...g.querySelectorAll(':scope>.stat')].forEach((s,i)=>{
+  const svg=s.querySelector('svg.bg'),sm=s.querySelector('small');
+  const icon=svg?svg.innerHTML:'';const lab=sm?sm.innerHTML:'';
+  const val=[...s.childNodes].filter(n=>n!==svg&&n!==sm).map(n=>n.nodeType===3?n.nodeValue:n.outerHTML).join('').trim();
+  s.removeAttribute('style');s.className='stat me-st s'+i;
+  s.innerHTML=`<span class="me-sb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></span><div class="me-sv"><b>${val}</b><small>${lab}</small></div>`});
+}catch(e){console.error(e)}};
+})();
 </script>
 <style id="dk-css">
 /* toast redesign (all sizes) */
