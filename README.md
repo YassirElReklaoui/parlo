@@ -138,3 +138,11 @@ You can customize supported learning content through `data.json`; connect or rel
 **Parlo — Impara l’italiano, ogni giorno. 🇮🇹**
 
 </div>
+
+
+## Content migration — version 234
+The current learning-content source is `data.json`. Most Italian lessons, reference terms, phonetic samples, grammar paradigms, and curated language checks are externalized. UI, navigation, calculations and exercise algorithms remain in `index.html`. See `MIGRATION_AUDIT.md` for verification details and limits. Deploy `index.html` and `data.json` together. Never publish `me.json`.
+
+
+## Internationalization
+See [README-I18N.md](README-I18N.md) for interface translations and Settings behavior.
