@@ -4579,6 +4579,9 @@ try{view()}catch(e){console.warn(e)}
     const compact=v.replace(/\s+/g,' ').replace(/^[·•]+\s*/,'').replace(/[.!:]+$/,'').trim();
     if(compact!==v&&Object.prototype.hasOwnProperty.call(dictionary,compact))return dictionary[compact];
     const indirect=LOW[lang][v.toLocaleLowerCase('en')];if(indirect!==undefined)return indirect;
+    // Allow UI punctuation wrapping a translated label while retaining all numeric values.
+    const trail=v.match(/^(.+?)([.!:]+)$/);
+    if(trail){const t=lookup(trail[1]);if(t!==null)return t+trail[2];}
     const lead=v.match(/^([·•:]\s*)(.+)$/);
     if(lead){const translated=lookup(lead[2]);if(translated!==null)return lead[1]+translated;}
     // English copy with variable counts, XP, minutes, percentages and numeric values.
@@ -4648,6 +4651,10 @@ html[dir="rtl"] .pl-studio,html[dir="rtl"] .modal{direction:rtl}
 html[dir="rtl"] svg.ic:is([data-ui-icon="chevron-right"],[data-ui-icon="chevron-left"],[data-ui-icon="arrow-right"],[data-ui-icon="arrow-left"],[data-ui-icon="arrow-narrow-right"],[data-ui-icon="arrow-narrow-left"]){transform:scaleX(-1)}
 html[dir="rtl"] .pgh .sub,html[dir="rtl"] .card .sub{text-align:right!important}
 html[dir="rtl"] [data-i18n-ignore][dir="ltr"],html[dir="rtl"] [lang="it"]{direction:ltr;unicode-bidi:isolate}
+/* Direction remains RTL for cards, but underlying Italian utterances must remain LTR. */
+html[dir="rtl"] .bub,html[dir="rtl"] .word,html[dir="rtl"] .v187-wodword,html[dir="rtl"] .p221-sentence-it{direction:ltr;unicode-bidi:plaintext}
+html[dir="rtl"] input[type="search"],html[dir="rtl"] input[placeholder]{text-align:start}
+
 
 </style>
 <script id="parlo-loader">
