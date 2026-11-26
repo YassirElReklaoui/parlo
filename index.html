@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B6B3A"><link rel="icon" type="image/png" href="./icons/favicon.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><title>Parlo · Learn Italian</title>
 <style>
 :root{--bg:#FBF5EA;--bg2:#F1E7D3;--card:#fff;--ink:#241B14;--mut:#8C7C6A;--g:#0E8A4B;--gd:#096B3A;--gl:#e3f5ea;--r:#E4382F;--rd:#B82820;--y:#FFC83D;--yd:#D9A21B;--b:#3D8BFF;--line:#E9DCC3;--sh:0 0.375rem 0 rgba(36,27,20,.07),0 0.875rem 1.875rem rgba(36,27,20,.07);--hd1:#0B6B3A;--hd2:#18a35a}
@@ -10,7 +10,7 @@ html{font-size:16.5px}html.fs0{font-size:14px}html.fs2{font-size:18px}html.fs3{f
 html,body{margin:0;height:100%;background:#0b3d23;font-family:var(--parlo-font);color:var(--ink)}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 /* Parlo unified typography: no external webfont requests or internet dependency. */
-:root{--parlo-font:"Williwaw Book",Georgia,"Palatino Linotype","Book Antiqua",serif}
+@font-face{font-family:'Parlo Serif';src:url(./fonts/parlo-serif-regular.woff) format('woff');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Parlo Serif';src:url(./fonts/parlo-serif-bold.woff) format('woff');font-weight:700 900;font-style:normal;font-display:swap}:root{--parlo-font:"Williwaw Book","Parlo Serif",Georgia,"Palatino Linotype","Book Antiqua",serif}
 html,body,#app,#main,#top,#nav,#les,#stage,.sheet,.modal,.pl-studio,.p221-workspace{font-family:var(--parlo-font)}
 button,input,textarea,select,option,optgroup,fieldset,legend{font-family:var(--parlo-font)!important;font-size:inherit}
 button,input,textarea,select{font-style:normal;letter-spacing:normal}
@@ -464,7 +464,7 @@ function vSet(){
  ${row('upload','Restore','Paste a backup to load it','',`<button class="btn ghost" style="margin-top:0.625rem;padding:0.6875rem" onclick="restore()">Restore</button>`)}
  ${row('trash','Reset progress','Start again from zero (settings stay)','',`<button class="btn red" style="margin-top:0.625rem;padding:0.6875rem" onclick="resetAll()">Reset</button>`)}
  </div>
- <p class="sub" style="padding:0.375rem 1.75rem 0">Progress is saved automatically in this browser. For additional protection, connect a personal me.json file or download a backup.</p></div>`}
+ <p class="sub" style="padding:0.375rem 1.75rem 0">Progress is saved automatically in this browser. For additional protection, connect a personal me.json file or download a backup.</p><p class="sub" id="parlo-build-line" style="padding:0.25rem 1.75rem 0;font-size:.75rem;opacity:.8">${typeof parloBuildLine==='function'?parloBuildLine():''}</p></div>`}
 function sheet(h){const s=document.createElement('div');s.className='sheet';s.onclick=e=>{if(e.target===s)s.remove()};s.innerHTML='<div>'+h+'</div>';$('#app').appendChild(s);return s}
 function langSheet(){sheet(`<h2 style="margin:0 0 0.75rem">I want to learn</h2>`+LANGS.map(l=>`<div class="wl" style="margin:0 0 0.625rem" onclick="pickLang('${l[0]}',this)">${flag(l[0])}<div><b>${l[1]}</b><small>${l[2]}${l[0]==='it'?' · learning now':''}</small></div><span class="pill" style="margin-left:auto">${l[0]==='it'?'Active':S.votes[l[0]]?'Voted':'Soon · vote'}</span></div>`).join(''))}
 function pickLang(c,el){if(c==='it'){document.querySelector('.sheet').remove();return}S.votes[c]=1;save();toast('Noted! '+LANGS.find(l=>l[0]===c)[2]+' is on the roadmap. Italian first.','flag');el.querySelector('.pill').textContent='Voted'}
@@ -3779,7 +3779,7 @@ plSafeSave();
 // Optional PWA installation: available only when served on HTTPS or localhost.
 let plInstallPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();plInstallPrompt=e});
-function plInstall(){if(!plInstallPrompt)return toast('Install from your browser menu after hosting the PWA over HTTPS','info-circle');plInstallPrompt.prompt();plInstallPrompt.userChoice.then(()=>{plInstallPrompt=null})}
+function plInstall(){if(!plInstallPrompt)return toast(parloIsIOS()?'Tap Share, then Add to Home Screen':'Open your browser menu, then Install app or Add to Home screen','info-circle');plInstallPrompt.prompt();plInstallPrompt.userChoice.then(()=>{plInstallPrompt=null})}
 if(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'){
  if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('PWA offline worker unavailable',e)));
 }
@@ -5628,8 +5628,8 @@ const parlo11VSet=vSet;vSet=function(){parlo11VSet.apply(this,arguments);const v
 // Install prompt: after first onboarding, once only per browser; never interrupt installed PWA sessions.
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();parlo11InstallPrompt=e});
 function parlo11IsInstalled(){return window.matchMedia?.('(display-mode: standalone)').matches||window.navigator.standalone===true}
-function parlo11InstallInfo(){if(parlo11IsInstalled())return toast('Parlo is already installed','check');const ios=/iPhone|iPad|iPod/i.test(navigator.userAgent),android=/Android/i.test(navigator.userAgent),secure=window.isSecureContext&&(location.protocol==='https:'||location.hostname==='localhost');const box=sheet(`<div class="p11-install-wrap"><div class="p11-install-art"><img src="./icons/icon-192.png" onerror="this.style.display='none'" alt="Parlo icon"><div><h2>Make Parlo your app</h2><p>Learn Italian directly from your home screen, even when you're offline after the first visit.</p></div></div><div class="p11-install-row">${ic('zap',20)} Open quickly from your home screen</div><div class="p11-install-row">${ic('wifi-off',20)} Continue offline with cached lessons</div><div class="p11-install-row">${ic('shield-check',20)} Your progress stays in your browser — back it up in Settings</div><p class="sub" style="text-align:left;margin:.8rem 0">${ios?'On iPhone: tap Safari’s Share button, then Add to Home Screen.':android?'On Android: tap Install below if available, or use your browser menu → Install app / Add to Home screen.':secure?'Use Install when available, or your browser menu → Install app.':'To install, open the hosted HTTPS version of Parlo (for example GitHub Pages).'}</p><div class="p11-install-actions"><button class="btn" onclick="parlo11InstallAction()">${ic('download',18)} ${parlo11InstallPrompt?'Install Parlo':'How to install Parlo'}</button><button class="btn ghost" onclick="this.closest('.sheet').remove()">Maybe later</button></div></div>`);box.classList.add('p11-install-sheet')}
-async function parlo11InstallAction(){if(parlo11InstallPrompt){const event=parlo11InstallPrompt;parlo11InstallPrompt=null;try{await event.prompt();await event.userChoice}catch(e){console.warn('Install prompt unavailable',e)}document.querySelector('.p11-install-sheet')?.remove()}else{toast(/iPhone|iPad/i.test(navigator.userAgent)?'Safari → Share → Add to Home Screen':'Browser menu → Install app / Add to Home screen','info-circle')}}
+function parlo11InstallInfo(){if(parlo11IsInstalled())return toast('Parlo is already installed','check');const ios=parloIsIOS(),android=/Android/i.test(navigator.userAgent),secure=window.isSecureContext&&(location.protocol==='https:'||location.hostname==='localhost');const box=sheet(`<div class="p11-install-wrap"><div class="p11-install-art"><img src="./icons/icon-192.png" onerror="this.style.display='none'" alt="Parlo icon"><div><h2>Make Parlo your app</h2><p>Learn Italian directly from your home screen, even when you're offline after the first visit.</p></div></div><div class="p11-install-row">${ic('zap',20)} Open quickly from your home screen</div><div class="p11-install-row">${ic('wifi-off',20)} Continue offline with cached lessons</div><div class="p11-install-row">${ic('shield-check',20)} Your progress stays in your browser — back it up in Settings</div><p class="sub" style="text-align:left;margin:.8rem 0">${ios?'On iPhone or iPad: tap the Share button in Safari, then Add to Home Screen.':android?'On Android: tap Install below if available, or use your browser menu → Install app / Add to Home screen.':secure?'Use Install when available, or your browser menu → Install app.':'To install, open the hosted HTTPS version of Parlo (for example GitHub Pages).'}</p><div class="p11-install-actions"><button class="btn" onclick="parlo11InstallAction()">${ic('download',18)} ${parlo11InstallPrompt?'Install Parlo':'How to install Parlo'}</button><button class="btn ghost" onclick="this.closest('.sheet').remove()">Maybe later</button></div></div>`);box.classList.add('p11-install-sheet')}
+async function parlo11InstallAction(){if(parlo11InstallPrompt){const event=parlo11InstallPrompt;parlo11InstallPrompt=null;try{await event.prompt();await event.userChoice}catch(e){console.warn('Install prompt unavailable',e)}document.querySelector('.p11-install-sheet')?.remove()}else{toast(parloIsIOS()?'Tap Share, then Add to Home Screen':'Browser menu → Install app / Add to Home screen','info-circle')}}
 // Capture the first onboarding submit; defer display until the existing welcome UI closes.
 document.addEventListener('click',e=>{if(!e.target.closest('#wgo'))return;let first=true;try{first=!localStorage.getItem('parlo-install-intro-seen');if(first)localStorage.setItem('parlo-install-intro-seen','1')}catch(e){console.warn('Install preference cannot be stored',e)}if(first)setTimeout(()=>{if(S.seen&&!parlo11IsInstalled())parlo11InstallInfo()},650)},true);
 window.addEventListener('appinstalled',()=>{document.querySelector('.p11-install-sheet')?.remove();toast('Parlo installed!','check')});
@@ -5716,4 +5716,72 @@ parlo12Listen=function(button,text){
   }
   return p13Listen(button,text);
 };
-</script></body></html>
+</script>
+<script>
+/* Parlo public fixes: update flow, storage persistence, backup reminder, build label. */
+const PARLO_BUILD='2026-11-26-a';
+function parloIsIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+function parloLS(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function parloBuildLine(){const p=parloLS('parlo-persist');return 'Parlo build '+PARLO_BUILD+' · '+(p==='1'?'Storage protected by browser':p==='0'?'Storage not guaranteed, keep a backup':'Storage status unknown')}
+function parloRefreshBuildLine(){const e=document.getElementById('parlo-build-line');if(e)e.textContent=parloBuildLine()}
+/* 1. Update flow */
+function parloUpdateBanner(reg){
+  if(document.getElementById('parlo-update'))return;
+  const b=document.createElement('div');b.id='parlo-update';
+  b.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));z-index:99999;background:var(--bg);color:var(--ink);border:2px solid var(--g);border-radius:1rem;padding:.65rem .75rem .65rem 1rem;display:flex;gap:.6rem;white-space:nowrap;align-items:center;box-shadow:0 .5rem 1.5rem rgba(0,0,0,.3);font-weight:800;font-size:.875rem;max-width:92%;width:max-content';
+  b.innerHTML=ic('refresh-cw',18)+'<span style="white-space:nowrap">New version ready</span><button class="btn" style="width:auto;padding:.5rem .9rem;margin:0" id="parlo-update-go">Reload</button><button class="btn ghost" aria-label="Dismiss" style="width:auto;padding:.5rem .6rem;margin:0" id="parlo-update-x">'+ic('x',16)+'</button>';
+  document.body.appendChild(b);
+  document.getElementById('parlo-update-x').onclick=()=>b.remove();
+  document.getElementById('parlo-update-go').onclick=()=>{const w=reg&&reg.waiting;if(w)w.postMessage('SKIP_WAITING');else location.reload()};
+}
+if('serviceWorker' in navigator){
+  let reloading=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading||!window.__parloHadSW)return;reloading=true;location.reload()});
+  window.addEventListener('load',()=>{
+    window.__parloHadSW=!!navigator.serviceWorker.controller;
+    navigator.serviceWorker.getRegistration('./').then(reg=>{
+      if(!reg)return;
+      const watch=r=>{if(r.waiting&&navigator.serviceWorker.controller)parloUpdateBanner(reg);r.addEventListener('updatefound',()=>{const nw=reg.installing;if(!nw)return;nw.addEventListener('statechange',()=>{if(nw.state==='installed'&&navigator.serviceWorker.controller)parloUpdateBanner(reg)})})};
+      watch(reg);
+      const check=()=>reg.update().catch(()=>{});
+      check();document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});setInterval(check,3600000);
+    });
+  });
+}
+/* 2. Ask the browser to keep storage */
+function parloPersist(){
+  if(!navigator.storage||!navigator.storage.persist)return;
+  navigator.storage.persisted().then(p=>p?true:navigator.storage.persist()).then(ok=>{parloLS('parlo-persist',ok?'1':'0');parloRefreshBuildLine()}).catch(()=>{});
+}
+document.addEventListener('pointerdown',function once(){document.removeEventListener('pointerdown',once,true);setTimeout(()=>{if(typeof S!=='undefined'&&S.seen)parloPersist()},1500)},true);
+window.addEventListener('appinstalled',()=>setTimeout(parloPersist,500));
+/* 3. Backup reminder: 7 days since last backup, only when there is progress to lose */
+function parloMarkBackup(){parloLS('parlo-last-backup',String(Date.now()))}
+(function(){
+  if(typeof plExport==='function'){const o=plExport;plExport=function(){const r=o.apply(this,arguments);parloMarkBackup();return r}}
+  if(typeof parloMeDownload==='function'){const o=parloMeDownload;parloMeDownload=function(){const r=o.apply(this,arguments);parloMarkBackup();return r}}
+  if(typeof parloMeSyncNow==='function'){const o=parloMeSyncNow;parloMeSyncNow=async function(){const r=await o.apply(this,arguments);if(typeof parloMeHandle!=='undefined'&&parloMeHandle)parloMarkBackup();return r}}
+})();
+function parloBackupNudge(){
+  try{
+    if(typeof S==='undefined'||!S.seen||!(S.xp>0))return;
+    if(typeof parloMeHandle!=='undefined'&&parloMeHandle)return;
+    const DAY=864e5,now=Date.now();
+    let last=Number(parloLS('parlo-last-backup'))||0;
+    if(!last&&typeof PL!=='undefined'&&PL.backupAt)last=Date.parse(PL.backupAt)||0;
+    if(!last){let first=Number(parloLS('parlo-first-seen'));if(!first){parloLS('parlo-first-seen',String(now));return}last=first}
+    if(now-last<7*DAY)return;
+    if(now-(Number(parloLS('parlo-nudge-at'))||0)<2*DAY)return;
+    if(document.getElementById('parlo-backup-nudge'))return;
+    parloLS('parlo-nudge-at',String(now));
+    const b=document.createElement('div');b.id='parlo-backup-nudge';
+    b.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));z-index:99998;background:var(--bg);color:var(--ink);border:2px solid var(--yd);border-radius:1rem;padding:.65rem .75rem .65rem 1rem;display:flex;gap:.6rem;white-space:nowrap;align-items:center;box-shadow:0 .5rem 1.5rem rgba(0,0,0,.3);font-weight:800;font-size:.875rem;max-width:92%';
+    b.innerHTML=ic('shield-check',18)+'<span style="white-space:nowrap">Back up progress</span><button class="btn" style="width:auto;padding:.5rem .9rem;margin:0" id="parlo-nudge-go">Back up</button><button class="btn ghost" aria-label="Dismiss" style="width:auto;padding:.5rem .6rem;margin:0" id="parlo-nudge-x">'+ic('x',16)+'</button>';
+    document.body.appendChild(b);
+    document.getElementById('parlo-nudge-x').onclick=()=>b.remove();
+    document.getElementById('parlo-nudge-go').onclick=()=>{b.remove();parloMeDownload()};
+  }catch(e){console.warn('backup reminder',e)}
+}
+window.addEventListener('load',()=>setTimeout(parloBackupNudge,6000));
+</script>
+</body></html>
