@@ -4470,6 +4470,43 @@ window.p230MeTools=function(){
 };
 const _vMeP230=vMe;vMe=function(){_vMeP230();try{p230MeTools()}catch(e){console.error(e)}};
 })();
+
+/* ===== p231: keep Italian (Latin-script) text LTR inside the RTL Arabic UI, globally ===== */
+(function(){
+const LAT=/[A-Za-z\u00C0-\u024F]/,ARB=/[\u0600-\u06FF\u0750-\u077F]/;
+const RUN=/\(?[A-Za-z\u00C0-\u024F][A-Za-z\u00C0-\u024F0-9'\u2019 .,;:!?\-\u00B7\/()\u2026\u00AB\u00BB"]*/g;
+const SKIP=new Set(['SCRIPT','STYLE','INPUT','TEXTAREA','SVG','svg','BDI','SELECT','OPTION','NOSCRIPT']);
+const isRtl=()=>document.documentElement.dir==='rtl'||document.body.dir==='rtl'||getComputedStyle(document.body).direction==='rtl';
+function wrapText(n){
+ const s=n.nodeValue;if(!LAT.test(s))return;
+ const parts=[];let last=0,m;RUN.lastIndex=0;
+ while((m=RUN.exec(s))){let r=m[0].replace(/[\s\u00B7\-,;:"(\u00AB]+$/,'');if(!r)continue;parts.push([m.index,r]);RUN.lastIndex=m.index+r.length}
+ if(!parts.length)return;
+ if(parts.length===1&&parts[0][1]===s.trim()&&n.parentNode&&n.parentNode.nodeType===1&&n.parentNode.childNodes.length===1&&!ARB.test(n.parentNode.textContent))return;
+ const f=document.createDocumentFragment();last=0;
+ for(const [i,r] of parts){if(i>last)f.appendChild(document.createTextNode(s.slice(last,i)));const b=document.createElement('bdi');b.dir='ltr';b.lang='it';b.setAttribute('data-p231','');b.textContent=r;f.appendChild(b);last=i+r.length}
+ if(last<s.length)f.appendChild(document.createTextNode(s.slice(last)));
+ n.parentNode.replaceChild(f,n);
+}
+function proc(el){
+ if(el.nodeType!==1||SKIP.has(el.tagName)||el.hasAttribute('data-p231')||el.closest('[data-p231]'))return;
+ const t=el.textContent;if(!LAT.test(t))return;
+ if(!ARB.test(t)){
+  const cs=getComputedStyle(el);
+  if(!el.querySelector('input,svg,img')){
+   el.setAttribute('dir','ltr');el.setAttribute('lang','it');el.setAttribute('data-p231','');el.style.unicodeBidi='isolate';
+   if(cs.textAlign==='right'||cs.textAlign==='end'||cs.textAlign==='start')el.style.textAlign='left';
+   return}
+ }
+ for(const c of [...el.childNodes]){if(c.nodeType===3)wrapText(c);else proc(c)}
+}
+let q=new Set(),sch=false;
+function flush(){sch=false;if(!isRtl()){q.clear();return}const l=[...q];q.clear();obs.disconnect();try{l.forEach(n=>{if(n.isConnected)n.nodeType===3?(n.parentNode&&n.parentNode.nodeType===1&&!n.parentNode.closest('[data-p231]')&&wrapText(n)):proc(n)})}catch(e){console.error(e)}obs.observe(document.body,{childList:true,subtree:true})}
+const obs=new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1&&n.hasAttribute&&n.hasAttribute('data-p231'))return;if(n.nodeType===1||n.nodeType===3)q.add(n)});if(!sch&&q.size){sch=true;requestAnimationFrame(flush)}});
+const st=document.createElement('style');st.textContent='[data-p231][dir=ltr]{unicode-bidi:isolate}bdi[data-p231]{unicode-bidi:isolate}';document.head.appendChild(st);
+obs.observe(document.body,{childList:true,subtree:true});
+q.add(document.body);requestAnimationFrame(flush);
+})();
 </script>
 <style id="dk-css">
 /* toast redesign (all sizes) */
