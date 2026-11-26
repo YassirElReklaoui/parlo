@@ -435,7 +435,7 @@ const seg=(k,o)=>`<div class="sw">${o.map(x=>`<button class="${C[k]===x[0]?'on':
 const row=(i,t,s,c,col)=>`<div class="row ${col?'rowcol':''}">${col?`<div class="top"><span class="ri">${ic(i,22)}</span><div class="tx">${t}<small>${s}</small></div>${c}</div>${col}`:`<span class="ri">${ic(i,22)}</span><div class="tx">${t}<small>${s}</small></div>${c}`}</div>`;
 function setC(k,v){const y=$('#main').scrollTop;C[k]=v;save();applyTheme();if(k==='fs')setTimeout(()=>{view();$('#main').scrollTop=y},0);else{view();$('#main').scrollTop=y}}
 function vSet(){
- $('#main').innerHTML=`<div class="view"><div style="display:flex;align-items:center;gap:0.625rem;margin:1.125rem 1rem 0"><button class="chip ib" style="background:var(--card);color:var(--ink);border:0.125rem solid var(--line)" onclick="TAB=SETBACK;view()">${ic('chevron-left',22)}</button><h1 style="margin:0;font-size:1.625rem;letter-spacing:-0.0375rem">Configuration</h1></div>
+ $('#main').innerHTML=`<div class="view"><div class="pgh" style="display:flex;align-items:center;gap:0.625rem;margin:1.125rem 1rem 0"><button class="chip ib pgb" aria-label="Back" style="background:var(--card);color:var(--ink);border:0.125rem solid var(--line)" onclick="TAB=SETBACK;view()">${ic('chevron-left',22)}</button><h1 style="margin:0;font-size:1.625rem;letter-spacing:-0.0375rem">Configuration</h1></div>
  <h2>${ic('bulb',22)} Learning</h2><div class="set">
  ${row('language','Main translation','Shown big under each new word','',seg('hint',[['en','EN'],['fr','FR'],['ar','AR']]))}
  ${row('language','Also show (small)','Extra languages under the main one','',subSeg())}
@@ -552,7 +552,7 @@ const PROVERBS=[['Chi dorme non piglia pesci','He who sleeps catches no fish'],[
 /* learn views */
 let LRN={p:'home',id:null,tense:'pr',q:''};
 const lgo=(p,id)=>{LRN.p=p;LRN.id=id;TAB='learn';view();$('#main').scrollTop=0};
-const backBar=(title,to,toId,sub)=>`<div style="display:flex;align-items:center;gap:0.625rem;margin:1.125rem 1rem 0.25rem"><button class="chip ib" style="background:var(--card);color:var(--ink);border:0.125rem solid var(--line)" onclick="lgo('${to}',${toId?`'${toId}'`:'null'})">${ic('chevron-left',22)}</button><div><h1 style="margin:0;font-size:1.5rem;letter-spacing:-0.0375rem">${title}</h1>${sub?`<div class="sub" style="text-align:left;margin:0">${sub}</div>`:''}</div></div>`;
+const backBar=(title,to,toId,sub)=>`<div class="pgh" style="display:flex;align-items:center;gap:0.625rem;margin:1.125rem 1rem 0.25rem"><button class="chip ib pgb" aria-label="Back" style="background:var(--card);color:var(--ink);border:0.125rem solid var(--line)" onclick="lgo('${to}',${toId?`'${toId}'`:'null'})">${ic('chevron-left',22)}</button><div><h1 style="margin:0;font-size:1.5rem;letter-spacing:-0.0375rem">${title}</h1>${sub?`<div class="sub" style="text-align:left;margin:0">${sub}</div>`:''}</div></div>`;
 const hl=(v,f,i)=>{if(!v.reg)return`<b class="en">${f}</b>`;const stem=v.inf.slice(0,-3);let k=0;while(k<stem.length&&f[k]===stem[k])k++;return`${f.slice(0,k)}<b class="en">${f.slice(k)}</b>`};
 function vLearn(){({home:lHome,verbs:lVerbs,verb:lVerb,rules:lRules,gram:lGram,topic:lTopic,phr:lPhr,stories:lStories,story:lStory,culture:lCulture,lab:lLab,kit:lKit})[LRN.p]()}
 function lHome(){const row=(i,t,s,col,fn)=>`<button class="scn" style="background:linear-gradient(135deg,${col[0]},${col[1]})" onclick="${fn}"><span class="t">${ic(i,30)}</span><div><b>${t}</b><small>${s}</small></div><span style="margin-left:auto">${ic('chevron-right',26)}</span></button>`;
@@ -1371,7 +1371,7 @@ SURP.push('verbQuiz()','numListen()','clockQuiz()','idmQuiz()','pairQuiz()','art
 BADGES.push(['coach1','bolt','Coached',()=>(S.coach||0)>=1],['heat1','calendar-stats','Consistent',()=>Object.keys(S.day).filter(k=>S.day[k]>0).length>=7]);
 const _cs=coachSheet;coachSheet=function(){S.coach=(S.coach||0)+1;save();_cs();checkBadges()};
 /* ===== v41 topic packs, v42 blitz, v43 opposites, v44 question words ===== */
-function ovl(h,t){let o=document.getElementById('ov2');if(!o){o=document.createElement('div');o.id='ov2';o.style.cssText='position:fixed;inset:0;z-index:85;background:var(--bg);overflow:auto;padding:0 0 1.875rem';document.body.appendChild(o)}o.innerHTML=`<div style="display:flex;align-items:center;padding:0.875rem;position:sticky;top:0;background:var(--bg);z-index:2"><button aria-label="Back" onclick="ovlClose()" style="display:flex;align-items:center;gap:0.125rem;padding:0.5rem 0.875rem 0.5rem 0.5rem;border-radius:1rem;border:0.125rem solid var(--line);background:var(--card);color:inherit;font:inherit;font-weight:800">${ic('chevron-left',24)}Back</button><b style="flex:1;text-align:center;font-size:1.125rem;margin-right:3.75rem;white-space:nowrap">${t||''}</b></div><div style="padding:0 1rem">${h}</div>`;return o}
+function ovl(h,t){let o=document.getElementById('ov2');if(!o){o=document.createElement('div');o.id='ov2';o.style.cssText='position:fixed;inset:0;z-index:85;background:var(--bg);overflow:auto;padding:0 0 1.875rem';document.body.appendChild(o)}o.innerHTML=`<div class="ovh" style="display:flex;align-items:center;padding:0.875rem;position:sticky;top:0;background:var(--bg);z-index:2"><button class="ovb" aria-label="Back" onclick="ovlClose()" style="display:flex;align-items:center;gap:0.125rem;padding:0.5rem 0.875rem 0.5rem 0.5rem;border-radius:1rem;border:0.125rem solid var(--line);background:var(--card);color:inherit;font:inherit;font-weight:800">${ic('chevron-left',24)}Back</button><b style="flex:1;text-align:center;font-size:1.125rem;margin-right:3.75rem;white-space:nowrap">${t||''}</b></div><div style="padding:0 1rem">${h}</div>`;return o}
 function ovlClose(){clearInterval(window.BZT);const o=document.getElementById('ov2');o&&o.remove()}
 const PACKS=[{n:'Body',i:'mood-smile',c:['#E4382F','#ff7a59'],w:[['la testa','head'],['la mano','hand'],['il piede','foot'],["l'occhio",'eye'],['il naso','nose'],['la bocca','mouth'],['il braccio','arm'],['la gamba','leg'],["l'orecchio",'ear'],['il cuore','heart']]},
 {n:'Clothes',i:'shirt',c:['#9B5DE5','#d38bff'],w:[['la camicia','shirt'],['i pantaloni','trousers'],['la gonna','skirt'],['il vestito','dress'],['la giacca','jacket'],['le scarpe','shoes'],['il cappello','hat'],['la maglia','sweater'],['i calzini','socks'],['la borsa','bag']]},
@@ -5794,6 +5794,18 @@ body .toast svg{flex:none;width:1.9rem!important;height:1.9rem!important;padding
 body .toast span{min-width:0}
 body.night .toast{background:#f1f7f4!important;color:#10211c!important;box-shadow:0 .7rem 1.8rem rgba(0,0,0,.5)!important}
 body.night .toast svg{background:rgba(16,33,28,.1);color:#10211c!important}
+/* page headers + back buttons (all sizes) */
+body .pgh{margin:.9rem .875rem .6rem!important;padding:.7rem .9rem .7rem .7rem;gap:.8rem!important;border-radius:1.5rem;background:linear-gradient(135deg,var(--card),var(--gl));border:.125rem solid var(--line);box-shadow:0 .35rem 1rem rgba(10,80,60,.08);position:relative;overflow:hidden}
+body .pgh::after{content:"";position:absolute;right:-1.6rem;top:-1.6rem;width:5.5rem;height:5.5rem;border-radius:50%;background:var(--g);opacity:.08;pointer-events:none}
+body .pgh>div{min-width:0}
+body .pgh h1{font-size:1.3rem!important;line-height:1.15;color:var(--ink)!important;letter-spacing:-.02rem!important}
+body .pgh .sub{font-size:.82rem!important;font-weight:700;color:var(--mut)!important;margin-top:.15rem!important}
+body .pgb,body .ovb{position:relative;width:2.9rem!important;height:2.9rem!important;min-width:2.9rem;padding:0!important;border-radius:50%!important;display:grid!important;place-items:center;flex:none!important;background:var(--g)!important;color:#fff!important;border:0!important;box-shadow:0 .25rem 0 var(--gd,rgba(0,0,0,.18));touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer;backdrop-filter:none!important}
+body .pgb::before,body .ovb::before{content:"";position:absolute;inset:-.4rem}
+body .pgb svg,body .ovb svg{pointer-events:none;color:#fff!important;stroke:currentColor}
+body .pgb:active,body .ovb:active{transform:translateY(.15rem);box-shadow:none}
+body .ovb{width:auto!important;min-width:2.9rem;padding:0 1rem 0 .6rem!important;border-radius:1.5rem!important;grid-auto-flow:column;gap:.15rem;font-weight:800}
+body .ovb svg{width:1.4rem;height:1.4rem}
 /* Parlo responsive layer. Everything is inside min-width rules, so phones (under 700px) never read it. */
 @media(min-width:700px){
 body #app{max-width:none!important}
