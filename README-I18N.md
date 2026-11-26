@@ -1,30 +1,27 @@
-# Parlo UI internationalization — v241
+# Parlo content layout: it_data/
 
-## Purpose
-This release separates **interface translations** (`i18n/en.json`, `i18n/ar.json`, `i18n/fr.json`) from Italian **learning content** (`data.json`).
+Learning language = folder. Italian course = `it_data/`.
 
-## Settings behavior
-- **Main translation & app language** = English / French / Arabic. Changing it also changes the interface language and stores the selection in the existing `parlo2` settings object.
-- **Also show (small)** = independently selectable supplementary word translations. Selecting Arabic as the main language while EN and FR are checked shows the Arabic meaning large and both EN and FR meanings smaller. Their text is protected from UI localization.
-- Arabic sets page `lang=ar` and `dir=rtl`; switching back sets `ltr`.
-- The Italian target-language text and pronunciation remain Italian. Do **not** change Italian speech to Arabic: Italian is the language the learner is studying.
+    it_data/index.json        languages, file names, fallback language
+    it_data/it-data.json      language-independent base: Italian text, ids, structure, audio refs, level logic, "learning" block
+    it_data/it-data.en.json   all translatable fields (English)
+    it_data/it-data.fr.json   same keys, French
+    it_data/it-data.ar.json   same keys, Arabic (MSA)
 
-## How it is implemented
-The startup loader loads the usual `data.json` and the three locale packs before running the app. A UI localization layer translates matching English display labels, descriptions, placeholders and accessibility labels, including newly rendered views/modals. The dictionary supports templates such as `{0} XP per day`. Italian learning terms and secondary translations are excluded from the UI translation pass. Source-level UI strings are retained for compatibility with older code.
+Each language file is `{lang, languageName, strings:{ "<path in base>": "text" }}`. The path is the position of the field in the base file, so the same key exists in every language file. The app loads base + the UI language (Settings > Main translation) and overlays it. If a key is missing it falls back to English.
+Changing the UI language reloads the page once, so the right file is loaded.
 
-## Deployment
-Replace `index.html`, `data.json`, `sw.js`; add the `i18n/` folder. Deploy them as a single update. The service worker caches all three i18n packs for offline use. Keep your repository's existing `fonts/` folder; font files are not included in this ZIP. Retain the icons provided. Never publish your personal `me.json`.
+## Add a language (example Spanish)
+1. Copy `it_data/it-data.en.json` to `it_data/it-data.es.json`, set `"lang":"es"` and `"languageName"`, translate the values (do not touch keys).
+2. Add `"es"` to `languages` in `it_data/index.json`.
+3. Add `i18n/es.json` (copy `i18n/en.json`, translate) for the app screens.
+4. Add `./it_data/it-data.es.json` and `./i18n/es.json` to the cache list in `sw.js`, bump its version.
+5. Run `python3 check_it_data.py` and `python3 check_i18n.py`. They list every missing, empty or broken ({0}, tags) value.
 
-## Compatibility / limitations
-- **`data.json` is byte-for-byte unchanged** from Parlo v240. All 446 data modules are preserved, with 38 units, 153 verbs, 24 dialogues and 14 stories.
-- The `parlo2` progress key, unit IDs, quiz answers and learning-data schema are unchanged.
-- **This release is not a guarantee of 100% text localization.** The catalogs cover many app controls and English vocabulary glosses, but uncommon dynamically generated status text and English-only instructional/grammar explanations inside the original learning datasets may still appear in English. Missing dictionary keys intentionally fall back to the original displayed source text, rather than showing blanks.
-- For thorough all-screens localization, remaining English-only course explanation text should be translated and added to locale-specific datasets; runtime UI rendering should ultimately call `t(key)` explicitly rather than relying solely on DOM translation. Existing browser-specific audio and PWA behavior was not exhaustively tested.
+## Other courses
+`index.html?course=xx` loads `./xx_data/index.json` (old `?data=xx` still works). Missing folder shows the friendly error page.
 
-## QA performed
-- JavaScript parsing, JSON catalog parsing and equality against the original v240 learning data.
-- Chromium DOM tests: all six main routes in EN, AR and FR; Arabic RTL and reversible language switching; main Arabic word + preserved small EN/FR meanings; no uncaught page errors in these tests.
-- Full content equality checks, 38 units / 153 runtime verbs / 24 dialogues / 14 stories.
-
-## Updating translations
-Edit `i18n/ar.json` or `i18n/fr.json`: under `strings`, add an exact English source phrase and its translation. For dynamic strings use `{0}`, `{1}` placeholder keys. Keep tags, application IDs and Italian target language entries unchanged. Update `sw.js` BUILD for every release to force cache refresh.
+## Checks
+    python3 check_it_data.py     # it_data language files
+    python3 check_i18n.py        # i18n/*.json app strings
+Both exit 1 on any gap.

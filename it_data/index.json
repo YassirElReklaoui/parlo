@@ -1,0 +1,626 @@
+{
+ "course": "it",
+ "name": "Italiano",
+ "base": "it-data.json",
+ "languages": [
+  "en",
+  "fr",
+  "ar"
+ ],
+ "fallback": "en",
+ "tables": [
+  {
+   "path": "modules/GLOSS_RAW#1",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [
+    5
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/GLOSS2_RAW#1",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [
+    5
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#1/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#2/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#3/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#4/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#5/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#6/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#7/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#8/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#9/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#10/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#11/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#12/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#13/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#14/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#15/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#16/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#17/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#18/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#19/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#20/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#21/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#22/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#23/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#24/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/mkLab#25/items",
+   "meaning": null,
+   "text": [
+    1
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/R#1",
+   "meaning": null,
+   "text": [
+    1,
+    5
+   ],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/ciao",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/num",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/cibo",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/fam",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/col",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/ver",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/cor",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/tem",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/cas",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/azi",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/via",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/cit",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/dir",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/rou",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/sal",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/tlb",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/ves",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/nat",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/lav",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/te2",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/emo",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/sho",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/esp",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/car",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/opi",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/tec",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/amb",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/soc",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/eco",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/sci",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/cul",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/dib",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/ast",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/str",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/idi",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/let",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/rar",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  },
+  {
+   "path": "modules/XW#1/fil",
+   "meaning": {
+    "en": 1,
+    "fr": 2,
+    "ar": 3
+   },
+   "text": [],
+   "children": false
+  }
+ ]
+}
