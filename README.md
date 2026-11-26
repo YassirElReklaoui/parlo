@@ -1,155 +1,68 @@
-<div align="center">
+<!-- First public release. Internal development versions are not shown in the application. -->
+# Parlo — Italian Learning (First Public Release)
 
-# 🇮🇹 Parlo — Learn Italian, Your Way
+No Python, command line, server, cloud account, or internet service is needed for the **standalone HTML**.
 
-**An offline-first Italian learning companion, from A1 to C2.**  
-Learn vocabulary, grammar, reading, listening, speaking and writing through interactive lessons, personalized study plans and progress tracking.
+## Files
 
-**No account required · Local-first progress · Installable web app**
+- `index.html` — Parlo interface, learning logic, and **Settings → Connected files** controls. The standalone `parlo-v232.html` has the same content.
+- `data.json` — editable curriculum and learning content. It contains 38 units and 532 vocabulary entries, together with the extracted content registries. It contains **no learner progress**.
+- `me.json` — a **blank starter profile only**. Do not overwrite your actual saved profile with this file. Export your own personal `me.json` from Parlo.
+- `sw.js`, `manifest.webmanifest`, `icons/` — optional installable PWA support when served over HTTPS/localhost.
 
-</div>
+## Use the app without running scripts
 
----
+1. Open `index.html` (or the single HTML) in a compatible browser.
+2. Open the **Me** page, then choose **Connected files → data.json & me.json**. The same controls are also in **Data Safety**.
+3. Press **Connect data.json** and choose the `data.json` file in the same folder. Parlo reads its curriculum immediately. To apply subsequent external edits, press **Reload file content** or reopen Parlo with access granted.
+4. For a learner with existing progress, use the same browser/origin as before. Export a backup first.
+5. Press **Reconnect / choose me.json** to select an existing personal profile, or **Create me.json** to create a writable file. Confirm whether to use the file's progress or the browser's existing progress.
+6. After permission is granted, progress updates are automatically written to connected `me.json`, debounced shortly after each save. `parlo2` browser storage stays as a safety copy. A visible message warns if automatic file saving stops.
+7. File connections are remembered through IndexedDB when the browser allows it. On later launches, previously granted permissions are reused when possible. If permission expired, reconnect through Settings.
 
-## ✨ About Parlo
+**Do not import the blank starter `me.json` over your actual progress.** Create a real backup from your existing Parlo browser profile.
 
-Parlo is a browser-based Italian learning application designed for independent, self-paced study. It combines a structured A1–C2 learning path with focused practice, adaptive review, interactive scenarios and personal learning analytics.
+## Editing content
 
-The app is built with HTML, CSS and JavaScript, can be deployed to **GitHub Pages**, and supports offline study once the installable web app has cached its resources. A standalone HTML build is also available for local use.
+`data.json` is read directly at runtime. **You do not run `build.py` and do not need to rebuild the HTML.** Select or reload it in Settings after editing. Parlo validates the content before replacing the loaded registries. Existing unit and word identifiers are protected because changing them could attach old progress to the wrong lesson or word. New content may be added while preserving existing identifiers. Some inherited hard-coded presentation and original lesson definitions remain in the HTML; this release makes the extracted curriculum registries live-editable.
 
-> **Educational note:** Parlo's CEFR exercises and readiness estimates are practice tools, not accredited language examinations or official proficiency certificates. Offline conversation and writing feedback use predefined rules rather than an unrestricted AI model.
+## Important browser limitations
 
-## 🚀 Features
+- **Automatic filesystem writes require the File System Access API**, a user gesture, and explicit read/write permission. Desktop Chrome and Edge on supported secure contexts are recommended. Support for `file://` varies by browser; opening the app from a stable local path is preferable to moving it frequently.
+- Other browsers can **load `data.json` using a file input** and **download/import `me.json` manually**, but they cannot silently overwrite a local file. Parlo never attempts to bypass this browser restriction.
+- If you move the standalone file to a different browser origin, old browser storage or granted file connections may not be shared. Use your exported `me.json` to restore.
+- Standalone HTML always has built-in curriculum content as a fallback until you connect `data.json`.
+- Core learning content works offline. A service worker requires an HTTPS/localhost install; local file-picker permissions are governed by the browser and may need renewal after reopening.
 
-| Area | What you can do |
-| --- | --- |
-| **A1–C2 learning path** | Follow 38 units with vocabulary, lessons, checkpoints and progress tracking. |
-| **Vocabulary & flashcards** | Study Italian words, browse contextual forms and review with spaced repetition. |
-| **Grammar & verbs** | Practice grammatical structures, sentence transformations and conjugations. |
-| **Personal learning tutor** | Receive study suggestions based on recorded activity, mistakes, weak concepts and due reviews. |
-| **Conversations** | Practice guided and branching Italian scenarios with offline rule-based feedback. |
-| **Reading & listening** | Work through stories, comprehension activities, audio playback and listening exercises. |
-| **Writing** | Keep an Italian diary and use guided writing activities. |
-| **CEFR practice** | Try level-specific diagnostics and review skill-based results and follow-up suggestions. |
-| **Progress & achievements** | Track XP, streaks, unit completion, mastery evidence, badges and learning activity. |
-| **Personalization** | Choose study goals, language hints, visual preferences and light/dark modes. |
-| **Offline & backup** | Work with local data and export/import personal progress in JSON format. |
+## Security and privacy
 
-Core learning features do not require a remote API or cloud account. Browser speech-recognition features can depend on the browser and may not work without internet access; typed alternatives remain available.
+`me.json` contains your personal profile: name, XP, lessons, goals, reviews, badges, exams, diary, history, mastery, preferences, and future state fields. Keep it private. No content or progress is uploaded. The installed PWA never precaches `me.json`.
 
-## 🗂️ Repository structure
+## Testing
 
-```text
-parlo/
-├── index.html              # Application UI and learning runtime
-├── data.json               # Shareable Italian curriculum and app content
-├── manifest.webmanifest    # Installable PWA metadata
-├── sw.js                   # Offline app-shell caching
-├── icons/                  # Application icons
-│   ├── icon-192.png
-│   └── icon-512.png
-├── README.md
-└── development/            # Optional source/development files
-```
+See `TEST_REPORT.md`. Browser tests cover reading a modified content file without rebuilding, preservation of 532 vocabulary entries, profile writes after progress changes, existing-ID protection, Settings UI, and JavaScript startup. Native system file permissions and installed PWA upgrades require testing on your device.
 
-**Do not publish a real `me.json`.** The packaged starter `me.json` is only a template. A personal export can contain your name, diary, learning history and settings. Keep your actual file private and outside the public repository.
 
-## 🌐 Deploy on GitHub Pages
+## v233: Verified me.json sync
 
-1. Create a GitHub repository (for example, `parlo`).
-2. Extract the Parlo PWA ZIP and upload `index.html`, `data.json`, `manifest.webmanifest`, `sw.js` and `icons/` to the repository root. You can include `development/` if you want to share source, but it is not required for hosting.
-3. **Do not upload your real `me.json`** or any backup containing personal data.
-4. In the repository, open **Settings → Pages → Build and deployment**.
-5. Choose **Deploy from a branch**, select `main` and `/ (root)`, and save.
-6. Open the GitHub Pages URL shown in your repository settings, typically:
+After granting read/write permission, personal changes (including name) queue a file update. Open **Me → Connected files → Sync now · Verify me.json** to force a write and verify the file contents. The status shows the verified save time and name. JSON stores the name at `profile.name`. If write permission expires, reconnect the file. `data.json` contains curriculum content and does not hold your name. The browser-local copy remains a safety backup.
 
-   `https://YOUR-USERNAME.github.io/parlo/`
 
-7. To transfer progress from a local copy, export your profile from the previous app and import it into the GitHub Pages version using **Me → Connected files** or **Data Safety**.
+## Public 1.1 enhancements
+- Installable custom Parlo icon and onboarding install guidance (HTTPS or localhost for install).
+- Global search in the header for pages, units, vocabulary, verbs, grammar, dialogue, stories, and sentences.
+- Profile backup, connect, restore, and sync controls grouped in Settings.
+- `me.json` is private, and should **not** be uploaded to a public GitHub repository. Mobile browser file writing is limited; browser-local progress continues independently.
 
-> **GitHub Pages is static hosting.** It can serve `data.json`, but it cannot automatically write changes to `me.json` in your repository. Public repositories and their published site are **not** appropriate storage locations for private learning profiles.
 
-## 💾 How progress is saved
+## GitHub Pages publishing
+Upload `index.html`, `data.json`, `manifest.webmanifest`, `sw.js`, `icons/`, and this README to the repository root. In GitHub, enable **Settings → Pages → Deploy from a branch → main → /(root)**.
+Never upload your real `me.json` to a public repository. After visiting your hosted URL, import your existing profile from **Settings → Keep your learning progress safe**.
+For installation, open the hosted HTTPS URL, then accept the install prompt where available or use the phone browser's Add to Home Screen command. Offline support depends on a successful initial cache install.
 
-Parlo separates **application content** from **personal learner data**:
+## Public 1.2 updates
 
-### `data.json` — curriculum content
-
-- Holds extracted app data such as units, vocabulary, dialogues, stories, grammar and assessment registries.
-- Can be connected or reloaded at runtime under **Me → Connected files**.
-- Editing supported registries does **not** require running Python or rebuilding the HTML.
-- Existing content IDs should remain stable to preserve compatibility with saved learner progress.
-- Some inherited presentation and lesson logic still resides in `index.html`; not every part of the app can be edited through `data.json`.
-
-### `me.json` — your private learning profile
-
-- Contains personal progress and preferences: name, XP, streaks, lesson completion, flashcard schedules, exams, achievements, diary entries, mastery/history and settings.
-- The app maintains a browser-local copy under the existing `parlo2` storage key.
-- From **Me → Connected files**, you can export a profile, connect an existing file or create a new one.
-- In compatible browsers, Parlo can write changes to an explicitly connected local `me.json` after you grant permission. Use **Sync now · Verify me.json** to check the latest write.
-- If the browser does not support writable file access, use manual JSON export/import instead.
-
-**Important:** Browser storage is specific to the site's origin and browser profile. Progress from a local `file://` copy does **not** automatically appear at a `github.io` URL, on a different device, or in another browser. Export/import `me.json` to move it. Clearing site data may erase the browser-local copy, so maintain a private backup.
-
-### A safe workflow
-
-1. Study normally; Parlo saves to browser storage.
-2. Export your profile as a private `me.json` backup.
-3. On a compatible browser, connect that file and grant write permission if you want automatic file synchronization.
-4. Check **Connected files → Sync now · Verify me.json** after important changes.
-5. Never commit your personal profile to a public repository.
-
-## 📱 Install and use offline
-
-On a browser that supports installing web apps, visit the deployed GitHub Pages site and use the browser's **Install app** or **Add to Home Screen** option.
-
-After the app shell is cached, supported lessons and bundled content can run offline. Initial installation, updates and reconnecting to GitHub Pages require internet access. Local-file permission prompts may reappear after browser restarts, and browser-based speech recognition is not guaranteed offline.
-
-A standalone HTML file can also be opened directly without GitHub Pages. Installing the PWA through GitHub Pages is generally more reliable for browser-managed caching than opening a local `file://` page.
-
-## 🔐 Privacy & data ownership
-
-- No account is required for core study.
-- Personal progress is stored locally unless you explicitly export or connect a profile file.
-- `me.json` is **private data**. Do not commit it, publish it through GitHub Pages, or include it in issue attachments.
-- `data.json` is app curriculum data and is suitable for public hosting when it contains no personal information.
-- GitHub Pages does **not** provide private multi-device progress sync. That would require an optional private synchronization service or manual file transfer.
-
-For safety, add a `.gitignore` with at least:
-
-```gitignore
-me.json
-me-*.json
-*personal*backup*.json
-```
-
-Also check the Git staging list before pushing. `.gitignore` does not remove a file already committed; if private data was committed, remove it from the repository and consider its commit history exposed.
-
-## 🛠️ Technology
-
-- HTML, CSS and vanilla JavaScript
-- Browser local storage and, where available, IndexedDB for remembered file connections
-- File System Access API for permission-based local JSON writes on compatible browsers
-- Web App Manifest and Service Worker for PWA installation and offline caching
-- Static deployment on GitHub Pages — no backend required
-
-## ⚠️ Current limitations
-
-- Open-ended AI conversations are not available offline; Parlo uses curated dialogue and validation rules.
-- Speaking recognition depends on browser/device capability and may require connectivity.
-- CEFR preparation is educational practice, not an official assessment.
-- Native writable file access varies by browser, operating system and permission state.
-- Full automatic synchronization between separate devices is not included.
-
-## 📌 Project status
-
-Parlo is an evolving personal learning project. Content, learning feedback and browser support should be validated before relying on them for high-stakes assessment. Contributions and issue reports describing reproducible problems are welcome; **please remove personal learning data before sharing files or screenshots**.
-
----
-
-<div align="center">
-
-**Parlo — Un passo alla volta. 🇮🇹**  
-*Learn a little every day. Make your Italian grow.*
-
-</div>
+- App icon uses the uploaded Parlo artwork.
+- Text scale: S 14px, M 16.5px, L 18px, XL 19px.
+- Word Pack listen buttons play the selected Italian word.
+- Grammar Guides animate only the tapped audio example.

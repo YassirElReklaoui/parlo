@@ -1,6 +1,6 @@
 /* Parlo offline installation: atomic install, no forced update of active sessions. */
-const CACHE = 'parlo-v233-shell-1';
-const ASSETS = ['./','./index.html','./manifest.webmanifest','./data.json','./icons/icon-192.png','./icons/icon-512.png'];
+const CACHE = 'parlo-public-1-shell-3';
+const ASSETS = ['./','./index.html','./manifest.webmanifest','./data.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-1024.png'];
 self.addEventListener('install', event => event.waitUntil((async () => {
   const next = await caches.open(CACHE);
   // Installation fails without a complete shell; an existing active worker remains in place.
