@@ -2948,6 +2948,13 @@
   "lit_review": "Review",
   "lit_regular_verb": "Regular -{0} verb",
   "nav_speak": "Speak",
-  "nav_me": "Me"
+  "nav_me": "Me",
+  "lit_finish_prev_stop": "Finish the previous stop first",
+  "lit_save_words_first": "Save some words first. Tap a word in Long listening and press Save word.",
+  "lit_pages": "Pages",
+  "lit_grammar": "Grammar",
+  "lit_search_ph": "Search lessons, words, verbs",
+  "lit_irregular": "irregular",
+  "lit_regular": "regular"
  }
 }

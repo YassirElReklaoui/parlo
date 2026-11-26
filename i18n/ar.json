@@ -2948,6 +2948,13 @@
   "lit_review": "مراجعة",
   "lit_regular_verb": "فعل منتظم في -{0}",
   "nav_speak": "تحدّث",
-  "nav_me": "أنا"
+  "nav_me": "أنا",
+  "lit_finish_prev_stop": "أنهِ المحطة السابقة أولاً",
+  "lit_save_words_first": "احفظ بعض الكلمات أولاً. اضغط على كلمة في الاستماع الطويل ثم اضغط على حفظ الكلمة.",
+  "lit_pages": "الصفحات",
+  "lit_grammar": "القواعد",
+  "lit_search_ph": "ابحث في الدروس والكلمات والأفعال",
+  "lit_irregular": "شاذ",
+  "lit_regular": "منتظم"
  }
 }

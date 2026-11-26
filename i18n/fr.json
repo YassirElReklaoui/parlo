@@ -2948,6 +2948,13 @@
   "lit_review": "Révision",
   "lit_regular_verb": "Verbe régulier en -{0}",
   "nav_speak": "Parler",
-  "nav_me": "Moi"
+  "nav_me": "Moi",
+  "lit_finish_prev_stop": "Terminez d'abord l'étape précédente",
+  "lit_save_words_first": "Enregistrez d'abord quelques mots. Touchez un mot dans l'écoute longue et appuyez sur Enregistrer le mot.",
+  "lit_pages": "Pages",
+  "lit_grammar": "Grammaire",
+  "lit_search_ph": "Rechercher leçons, mots, verbes",
+  "lit_irregular": "irrégulier",
+  "lit_regular": "régulier"
  }
 }
