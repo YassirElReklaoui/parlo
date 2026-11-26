@@ -1,5 +1,5 @@
 /* Parlo offline worker. Build id below must change with every release (it also names the cache). */
-const BUILD = '2026-11-27-content-1';
+const BUILD = '2026-11-26-content-240';
 const CACHE = 'parlo-' + BUILD;
 const ASSETS = ['./','./index.html','./manifest.webmanifest','./data.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-logo-128.png','./icons/favicon.png','./fonts/parlo-serif-regular.woff','./fonts/parlo-serif-bold.woff'];
 self.addEventListener('install', event => event.waitUntil((async () => {

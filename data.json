@@ -1,7 +1,7 @@
 {
   "format": "parlo-app-data",
-  "contentVersion": 234,
-  "description": "Parlo content repository: Italian learning content and curated language-specific references; app rendering and algorithms in index.html.",
+  "contentVersion": 240,
+  "description": "Complete editorial Italian learning datasets and reference values. UI and algorithms remain in index.html.",
   "registries": {
     "UNITS": [
       {
@@ -26148,6 +26148,337 @@
       "tea": "il tè",
       "meeting": "riunione",
       "completed": "Storia completata!"
+    },
+    "CONTENT_ITALIAN_POSS#1": [
+      [
+        "my",
+        "mio",
+        "mia"
+      ],
+      [
+        "your",
+        "tuo",
+        "tua"
+      ],
+      [
+        "his, her",
+        "suo",
+        "sua"
+      ],
+      [
+        "our",
+        "nostro",
+        "nostra"
+      ],
+      [
+        "your (pl)",
+        "vostro",
+        "vostra"
+      ],
+      [
+        "their",
+        "loro",
+        "loro"
+      ]
+    ],
+    "CONTENT_ITALIAN_PNN#1": [
+      [
+        "libro",
+        "m"
+      ],
+      [
+        "casa",
+        "f"
+      ],
+      [
+        "amico",
+        "m"
+      ],
+      [
+        "amica",
+        "f"
+      ],
+      [
+        "macchina",
+        "f"
+      ],
+      [
+        "zaino",
+        "m"
+      ],
+      [
+        "scuola",
+        "f"
+      ],
+      [
+        "telefono",
+        "m"
+      ],
+      [
+        "famiglia",
+        "f"
+      ],
+      [
+        "cane",
+        "m"
+      ]
+    ],
+    "CONTENT_ITALIAN_ARTICLE_QUIZ_OPTIONS#1": [
+      [
+        "il",
+        "lo",
+        "la",
+        "l'"
+      ],
+      [
+        "un",
+        "uno",
+        "una",
+        "un'"
+      ],
+      [
+        "i",
+        "gli",
+        "le"
+      ]
+    ],
+    "CONTENT_ITALIAN_ARTICLES_EXPLANATION#1": {
+      "definite": "il, lo, la, l' (plural i, gli, le)",
+      "indefinite": "un, uno, una, un'",
+      "special": "lo / uno"
+    },
+    "CONTENT_ITALIAN_POSSESSIVE_EXAMPLES#1": "il mio libro, la mia casa",
+    "CONTENT_ITALIAN_DEMONSTRATIVE_NEAR#1": "questo / questa",
+    "CONTENT_ITALIAN_DEMONSTRATIVE_FAR#1": "quello / quella",
+    "CONTENT_ITALIAN_DEMONSTRATIVE_FORMS#1": {
+      "m": [
+        "questo",
+        "quello"
+      ],
+      "f": [
+        "questa",
+        "quella"
+      ]
+    },
+    "CONTENT_ITALIAN_NEGATION_STOPWORDS#1": [
+      "non",
+      "mai",
+      "nessun",
+      "nessuna",
+      "senza",
+      "no",
+      "ne",
+      "neanche",
+      "nemmeno"
+    ],
+    "CONTENT_ITALIAN_NEGATION_RULES#1": {
+      "without": "senza",
+      "gluten": "senza glutine",
+      "lactose": "senza lattosio",
+      "negators": [
+        "non",
+        "nessun",
+        "nessuna",
+        "mai"
+      ],
+      "but": "ma"
+    },
+    "CONTENT_ITALIAN_VERB_DRILL_CLASSIC#1": [
+      "fare"
+    ],
+    "CONTENT_ITALIAN_VERB_DRILL_EXPANDED#1": [
+      "fare",
+      "dare",
+      "stare"
+    ],
+    "CONTENT_ITALIAN_MARKET_UN_MASC_VOWEL#1": "un ",
+    "CONTENT_ITALIAN_PAST_HO_FORM#1": "ho ",
+    "CONTENT_ITALIAN_PAST_HO_FORM_SHORT#1": "ho",
+    "CONTENT_ITALIAN_ARTICLE_DEFINITE_ELIDED#1": "l'",
+    "CONTENT_ITALIAN_ARTICLE_INDEFINITE_ELIDED#1": "un'",
+    "CONTENT_ITALIAN_REGEX_NON_LETTER#1": {
+      "source": "([^a-zàèéìòóùú]+)",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_SPECIAL_VOWELS#1": {
+      "source": "[èù]",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_TOKEN_TRIM#1": {
+      "source": "^[^a-zàèéìòù]+|[^a-zàèéìòù'’]+$",
+      "flags": "g"
+    },
+    "CONTENT_ITALIAN_REGEX_LEFT_TRIM#1": {
+      "source": "^[^a-zA-Zàèéìòù]*",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_RIGHT_TRIM#1": {
+      "source": "[^a-zA-Zàèéìòù]*$",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_ACCENT_TEST#1": {
+      "source": "[àèéìòù]",
+      "flags": "i"
+    },
+    "CONTENT_ITALIAN_REGEX_INTENT_NEGATION#1": {
+      "source": "(?:^|\\s)(?:non|mai|nessun[ao]?)(?:\\s|$)",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_INTENT_NEGATION_EXCEPTION#1": {
+      "source": "\\b(no|nessuna|senza|non)\\b",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_ALPHABET#1": {
+      "source": "[a-zàèéìòù]",
+      "flags": ""
+    },
+    "CONTENT_ITALIAN_REGEX_TOKENIZER#1": {
+      "source": "[a-z0-9àèéìòù']+",
+      "flags": "g"
+    },
+    "CONTENT_ITALIAN_INTENT_SHORT_WORDS#1": [
+      "pago",
+      "con"
+    ],
+    "CONTENT_ITALIAN_CONTRAST_WORDS#1": [
+      "ma",
+      "invece",
+      "pero"
+    ],
+    "CONTENT_ITALIAN_WITHOUT_PREFIX#1": "senza",
+    "CONTENT_ITALIAN_ARTICLES_ELIDED_LABEL#1": "l' / un'",
+    "CONTENT_ITALIAN_NOUN_PLURAL_RULE#1": {
+      "from": "ica",
+      "to": "iche",
+      "finalOe": "[oe]$",
+      "pluralI": "i",
+      "finalA": "a$",
+      "pluralE": "e"
+    },
+    "CONTENT_ITALIAN_PREPOSITION_EXAMPLE#1": "in + la = nella.",
+    "CONTENT_ITALIAN_NUMBERS_RULE_EXAMPLE#1": "uno and otto (ventuno, ventotto). Three gets an accent: ventitré.",
+    "CONTENT_ITALIAN_ADJECTIVE_GENDER_EXAMPLE#1": "bello, bella, belli, belle",
+    "CONTENT_ITALIAN_PRONOUN_IO#1": "io",
+    "CONTENT_ITALIAN_PREPOSITION_SCHOOL_SUFFIX#1": " scuola",
+    "CONTENT_ITALIAN_ACCENT_NORMALIZATION#1": {
+      "from": "é",
+      "to": "e"
+    },
+    "CONTENT_ITALIAN_THOUSAND_WORDS#1": {
+      "one": "mille",
+      "plural": "mila"
+    },
+    "CONTENT_ITALIAN_REFLEXIVE_QUIZ_CONFIG#1": {
+      "pronouns": [
+        "mi",
+        "ti",
+        "si",
+        "ci",
+        "vi",
+        "si"
+      ],
+      "roots": [
+        [
+          "alzare",
+          "alz"
+        ],
+        [
+          "lavare",
+          "lav"
+        ],
+        [
+          "svegliare",
+          "svegli"
+        ],
+        [
+          "vestire",
+          "vest"
+        ]
+      ],
+      "endings": [
+        [
+          "o",
+          "i",
+          "a",
+          "iamo",
+          "ate",
+          "ano"
+        ],
+        [
+          "o",
+          "i",
+          "a",
+          "iamo",
+          "ate",
+          "ano"
+        ],
+        [
+          "o",
+          "i",
+          "a",
+          "iamo",
+          "ate",
+          "ano"
+        ],
+        [
+          "o",
+          "i",
+          "e",
+          "iamo",
+          "ite",
+          "ono"
+        ]
+      ],
+      "subjects": [
+        "io",
+        "tu",
+        "lui",
+        "noi",
+        "voi",
+        "loro"
+      ],
+      "actions": [
+        [
+          "alzarsi",
+          "alz",
+          0
+        ],
+        [
+          "lavarsi",
+          "lav",
+          1
+        ],
+        [
+          "svegliarsi",
+          "svegli",
+          2
+        ],
+        [
+          "vestirsi",
+          "vest",
+          3
+        ]
+      ]
+    },
+    "CONTENT_ITALIAN_REFLEXIVE_PRONOUN_OPTIONS#1": [
+      "mi",
+      "ti",
+      "si",
+      "ci",
+      "vi"
+    ],
+    "CONTENT_ITALIAN_CELEBRATION#1": "Ben fatto!",
+    "CONTENT_ITALIAN_PAYMENT_FEEDBACK#1": "Say whether you prefer carta or contanti.",
+    "CONTENT_ITALIAN_GREEN_THEME_LABEL#1": "Verde",
+    "CONTENT_ITALIAN_PREPOSITION_DESCRIPTION#1": "a, di, da, in, su plus the article: table and drill",
+    "CONTENT_ITALIAN_VERB_ENDING_DESCRIPTION#1": "-are, -ere and -ire endings at a glance",
+    "CONTENT_ITALIAN_VERB_ENDING_LIST#1": "<b>-are</b>, <b>-ere</b> or <b>-ire</b>",
+    "CONTENT_ITALIAN_VERB_ENDING_PLAIN#1": "-are, -ere or -ire",
+    "CONTENT_ITALIAN_ISC_CONJUGATION_LABEL#1": " with -isc-",
+    "CONTENT_ITALIAN_REFLEXIVE_DISPLAY_EXAMPLE#1": "mi, ti, si, ci, vi, si: mi alzo, ti alzi, si alza.",
+    "CONTENT_ITALIAN_ARTICLE_PHONETIC_RULES#1": {
+      "special": "s + consonant, z, gn, ps, x, y",
+      "elided": "un' only with feminine"
     }
   },
   "contentArchitecture": {
