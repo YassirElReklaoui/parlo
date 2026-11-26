@@ -1,7 +1,7 @@
 /* Parlo offline worker. Build id below must change with every release (it also names the cache). */
-const BUILD = '2026-11-26-a';
+const BUILD = '2026-11-26-d';
 const CACHE = 'parlo-' + BUILD;
-const ASSETS = ['./','./index.html','./manifest.webmanifest','./data.json','./icons/icon-192.png','./icons/icon-512.png','./icons/favicon.png','./fonts/parlo-serif-regular.woff','./fonts/parlo-serif-bold.woff'];
+const ASSETS = ['./','./index.html','./manifest.webmanifest','./data.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-logo-128.png','./icons/favicon.png','./fonts/parlo-serif-regular.woff','./fonts/parlo-serif-bold.woff'];
 self.addEventListener('install', event => event.waitUntil((async () => {
   const next = await caches.open(CACHE);
   // Installation fails without a complete shell; an existing active worker stays in place.
