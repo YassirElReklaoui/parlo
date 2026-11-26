@@ -4584,6 +4584,11 @@ try{view()}catch(e){console.warn(e)}
     if(trail){const t=lookup(trail[1]);if(t!==null)return t+trail[2];}
     const lead=v.match(/^([·•:]\s*)(.+)$/);
     if(lead){const translated=lookup(lead[2]);if(translated!==null)return lead[1]+translated;}
+    // UI-only numeric prefix/suffix, e.g. '5 cards due for review' / '153 verbs'.
+    const numberPrefix=v.match(/^(\d+)\s+(.+)$/);
+    if(numberPrefix){const key='{0} '+numberPrefix[2];if(Object.prototype.hasOwnProperty.call(dictionary,key))return dictionary[key].replace('{0}',numberPrefix[1]);}
+    const numberSuffix=v.match(/^(.+?)\s+(\d+)$/);
+    if(numberSuffix){const key=numberSuffix[1]+' {0}';if(Object.prototype.hasOwnProperty.call(dictionary,key))return dictionary[key].replace('{0}',numberSuffix[2]);}
     // English copy with variable counts, XP, minutes, percentages and numeric values.
     for(const [rx,b] of PAT[lang]){
       const m=v.match(rx);if(m)return b.replace(/\{(\d+)\}/g,(_,n)=>m[+n+1]||'');
@@ -4636,6 +4641,8 @@ try{view()}catch(e){console.warn(e)}
     if(!observer){observer=new MutationObserver(schedule);observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label']})}
     schedule();
   }
+  // Prefer keyed copy for newly authored interface elements instead of inserting raw English.
+  window.uiText=(key,...params)=>{const raw=T.en[key]||key;const translated=lang==='en'?raw:(T[lang][key]||lookup(raw)||raw);return String(translated).replace(/\{(\d+)\}/g,(_,n)=>params[+n]??'');};
   window.__UII18N={init,setLanguage,t:(s)=>lookup(String(s))||s,refresh:schedule,get lang(){return lang},get packs(){return T}};
 })();
 </script>
