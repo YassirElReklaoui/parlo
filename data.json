@@ -1,7 +1,7 @@
 {
   "format": "parlo-app-data",
-  "contentVersion": 233,
-  "description": "Parlo curriculum, Italian vocabulary, examples, grammar references and extracted language text. Application UI and algorithms live in index.html.",
+  "contentVersion": 234,
+  "description": "Parlo content repository: Italian learning content and curated language-specific references; app rendering and algorithms in index.html.",
   "registries": {
     "UNITS": [
       {
@@ -25615,12 +25615,545 @@
     "CONTENT_EXPLANATION_7a1d1ae7695035#1": "Review subject agreement for the present tense of essere.",
     "CONTENT_EXPLANATION_a40cb4c6deebe3#1": " With essere the participle agrees with the subject (andato for a man, andata for a woman).",
     "CONTENT_EXPLANATION_6ab791cca44d37#1": " with -isc- in io, tu, lui and loro (like capire).",
-    "CONTENT_EXPLANATION_2db0d00e6f610f#1": "This device has no Italian voice, so words can sound English (for example \"grazie\" read with a Y)."
+    "CONTENT_EXPLANATION_2db0d00e6f610f#1": "This device has no Italian voice, so words can sound English (for example \"grazie\" read with a Y).",
+    "CONTENT_RUNTIME_TEXT_793ce88ae6b6740b#1": "lui / lei",
+    "CONTENT_RUNTIME_TEXT_06a09f8a11755cc5#1": "lui",
+    "CONTENT_RUNTIME_TEXT_efe7b1897a4c0759#1": " With essere the participle agrees with the subject (andato for a man, andata for a woman).",
+    "CONTENT_RUNTIME_TEXT_5eb93b04b9c57cdf#1": "parlare",
+    "CONTENT_RUNTIME_TEXT_7ba59920ced7d195#1": "vedere",
+    "CONTENT_RUNTIME_TEXT_f746d94483069009#1": "dormire",
+    "CONTENT_RUNTIME_TEXT_7d30af6c979a0cee#1": "tre",
+    "CONTENT_RUNTIME_REGEX_ad7b39667953f3df#1": "gli(?=[aeiou])",
+    "CONTENT_RUNTIME_TEXT_9ac9f48b58aa94b1#1": "This device has no Italian voice, so words can sound English (for example \"grazie\" read with a Y).",
+    "CONTENT_RUNTIME_TEXT_f3d22bc70c0289e9#1": "Tu",
+    "CONTENT_RUNTIME_REGEX_a756cd7ad8ed84d7#1": "^(il|lo|la|l'|i|gli|le) ?",
+    "CONTENT_RUNTIME_TEXT_c9a00cac9c71c1e4#1": "Eccellente",
+    "CONTENT_RUNTIME_TEXT_57bbae3aa3ccdade#1": "Ottimo",
+    "CONTENT_RUNTIME_TEXT_b142cf5f5f45a1f2#1": "Buono",
+    "CONTENT_RUNTIME_TEXT_0002fb6075db5b58#1": "Sufficiente",
+    "CONTENT_RUNTIME_REGEX_615ce32d7d456ef5#1": "^(io|tu|lui|lei|noi|voi|loro) ",
+    "CONTENT_RUNTIME_TEXT_98295780b2d3de07#1": "una ",
+    "CONTENT_RUNTIME_TEXT_8dc21ce590578cc7#1": "amica",
+    "CONTENT_RUNTIME_TEXT_5987f23dd5c04d71#1": "mi",
+    "CONTENT_RUNTIME_TEXT_1f47d10bdb6295cf#1": "ti",
+    "CONTENT_RUNTIME_TEXT_6a26f3e07ea3824b#1": "si",
+    "CONTENT_RUNTIME_TEXT_875a6b71ddd2fd3f#1": " with -isc- in io, tu, lui and loro (like capire).",
+    "CONTENT_RUNTIME_TEXT_4ad9c7faf78320d7#1": " An h is added before i and e to keep the hard sound (tu ",
+    "CONTENT_RUNTIME_TEXT_542762216cad43b9#1": " The stem ends in i, so there is only one i (tu ",
+    "CONTENT_RUNTIME_TEXT_8e486ba8dc2c5648#1": "essere",
+    "CONTENT_RUNTIME_TEXT_5b9bcbdaed18fbc5#1": "Italiano…",
+    "CONTENT_RUNTIME_TEXT_acc69720148a4314#1": "Perfetto!",
+    "CONTENT_RUNTIME_TEXT_1f758d79b677b211#1": "Bravo!",
+    "CONTENT_RUNTIME_TEXT_f150e0e3a8d22438#1": "Esatto!",
+    "CONTENT_RUNTIME_TEXT_18c2ab409cd3f26f#1": "Magnifico!",
+    "CONTENT_RUNTIME_REGEX_bdc3ebb1e249660f#1": "\\b(io|tu|lui|lei|noi|voi|loro)\\s+(essere|avere)\\b",
+    "CONTENT_RUNTIME_REGEX_705519284cd25804#1": "\\b(ieri|la settimana scorsa)\\b",
+    "CONTENT_RUNTIME_REGEX_e65ea0ccee70cdc4#1": "\\b(domani)\\b",
+    "CONTENT_RUNTIME_TEXT_01780563afaabaa6#1": "no",
+    "CONTENT_RUNTIME_TEXT_070bce5e1345a219#1": "prego",
+    "CONTENT_RUNTIME_TEXT_5835644d75100431#1": "favore",
+    "CONTENT_RUNTIME_TEXT_72cf9533ed983c28#1": "molto",
+    "CONTENT_RUNTIME_TEXT_cda392acd43296c4#1": "bene",
+    "CONTENT_RUNTIME_TEXT_7e0beb5c88851244#1": "oggi",
+    "CONTENT_RUNTIME_REGEX_a5098ff429b0745b#1": "\\b(?:una amica|una acqua|una arancia)\\b",
+    "CONTENT_RUNTIME_TEXT_aeec6f44a15a1c6c#1": "Review elision before vowel-initial feminine nouns: un’amica, un’acqua, un’arancia.",
+    "CONTENT_RUNTIME_REGEX_a82f23aab874f1af#1": "\\b(?:io ha|tu ho|noi hanno|voi abbiamo)\\b",
+    "CONTENT_RUNTIME_TEXT_c26bb938b329ebb5#1": "Review subject agreement for the present tense of avere.",
+    "CONTENT_RUNTIME_REGEX_4c265517825cc101#1": "\\b(?:noi sono|voi siamo|io sei)\\b",
+    "CONTENT_RUNTIME_TEXT_e92e9a1c82801228#1": "Review subject agreement for the present tense of essere.",
+    "CONTENT_RUNTIME_REGEX_6812b451cfe9c795#1": "^(?:l'|il |lo |la |i |gli |le |un |una |uno )",
+    "CONTENT_RUNTIME_DISPLAY_45353a8c3594d1e9#1": "BENVENUTO A PARLO",
+    "CONTENT_RUNTIME_DISPLAY_094b583a8df520e3#1": "Ciao! Your Italian",
+    "CONTENT_RUNTIME_DISPLAY_213442db142ac787#1": "PARLO · ITALIANO",
+    "CONTENT_RUNTIME_DISPLAY_fbf935db6d662c65#1": "Domani, la prossima settimana, l'anno prossimo. Endings: -ò, -ai, -à, -emo, -ete, -anno. -are verbs change to -er-: parlerò.",
+    "CONTENT_RUNTIME_DISPLAY_88e4658bbca19558#1": "Noi always ends in <b>-iamo</b>. Loro ends in <b>-ano</b> for -are verbs and <b>-ono</b> for the others.",
+    "CONTENT_RUNTIME_DISPLAY_7d9155ceb69a30fa#1": "Past tense shown with avere. Verbs of movement and reflexive verbs use essere instead, and a few verbs are irregular, so double-check with a dictionary.",
+    "CONTENT_RUNTIME_DISPLAY_7d84396f07b91640#1": "If there is no Italian voice, the app respells words for an English voice (grazie becomes \"grahtsee-eh\"). It is only an approximation.",
+    "CONTENT_RUNTIME_DISPLAY_4fd6791dc842d784#1": "Test: grazie, buongiorno, gelato, famiglia",
+    "CONTENT_RUNTIME_AUDIO_3345dce63f90d3d2#1": "Ciao, come stai? Io sono Gigi.",
+    "CONTENT_RUNTIME_AUDIO_10f538d9528abbb7#1": "Ciao, come stai? Grazie mille, buongiorno!",
+    "CONTENT_RUNTIME_PARADIGM_c921c60b54dfc2a9#1": {
+      "essere": [
+        "ero",
+        "eri",
+        "era",
+        "eravamo",
+        "eravate",
+        "erano"
+      ]
+    },
+    "CONTENT_RUNTIME_PARADIGM_f19d7d0e5d0c2549#1": {
+      "fare": "facev",
+      "dire": "dicev",
+      "bere": "bevev",
+      "tradurre": "traducev",
+      "porre": "ponev",
+      "proporre": "proponev"
+    },
+    "CONTENT_PLACEHOLDER_e0be9d589d338e#1": "Italiano...",
+    "CONTENT_PLACEHOLDER_b7b7222f290487#1": "Oggi vorrei raccontare...",
+    "CONTENT_LABEL_cda08b930b468d#1": "Certificato ",
+    "CONTENT_FEEDBACK_bd771f285bb54e#1": "Bravo! Review the rule.",
+    "CONTENT_EXPLANATION_c4ae7d2ea17329#1": "<b>Remember:</b> noi always ends in <b>-iamo</b>. Loro ends in <b>-ano</b> for -are verbs and <b>-ono</b> for the others.",
+    "CONTENT_EXPLANATION_70e38a4fc5dc96#1": "<div class=\"tx\">-are<br>parlare</div><div class=\"tx\">-ere<br>vedere</div><div class=\"tx\">-ire<br>dormire</div>",
+    "CONTENT_VOICE_LABEL_baf2d02f8a49db#1": "Italiano (Italia)",
+    "CONTENT_TERM_faebab5fa2e55b#1": "uno",
+    "CONTENT_TERM_e0fea50916c26c#1": ". lui ",
+    "CONTENT_TERM_b1dbae2f03dbad#1": "il, lo, la or l'? Pick the right one",
+    "CONTENT_PATTERN_45c06f1714a4b3#1": "^un\\'amica$",
+    "CONTENT_PATTERN_3f8b957f79a9d3#1": "\\b(non voglio|non desidero|non posso)\\b",
+    "CONTENT_PATTERN_357001d30683c2#1": "\\bnon (?:voglio|desidero)\\b",
+    "CONTENT_PATTERN_2e8bcb82482b0f#1": "articol|\\bil\\b|\\blo\\b|\\bla\\b|\\bgli\\b",
+    "CONTENT_PATTERN_246cb6ae70d105#1": "future|futuro",
+    "CONTENT_PATTERN_13d2abe0593c95#1": "gli",
+    "CONTENT_PLACEHOLDER_25495d9d074f91e3#1": "Italiano…",
+    "CONTENT_FEEDBACK_dc8f7668663705eb#1": "Ottimo!",
+    "CONTENT_VOICE_HELP_6ad9ec4f77c17f92#1": "Tap the gear icon next to it, then <b>Install voice data</b> (or <b>Language</b>) and choose <b>Italiano (Italia)</b>. Download a voice.",
+    "CONTENT_LEXICAL_MATCH_5e660134d5fc2bc2#1": [
+      "roma",
+      "milano",
+      "firenze",
+      "napoli",
+      "venezia",
+      "torino",
+      "biglietto"
+    ],
+    "CONTENT_LEXICAL_b2fca04b6a64ef7f#1": "Past (passato prossimo)",
+    "CONTENT_LEXICAL_ff6bc1213d029f60#1": " (no -isc-), like dormire.",
+    "CONTENT_LEXICAL_67dfe3a4b58ba096#1": "vado",
+    "CONTENT_ACCENT_KEYBOARD#1": [
+      "à",
+      "è",
+      "é",
+      "ì",
+      "ò",
+      "ù"
+    ],
+    "CONTENT_IMPERFECT_ENDINGS#1": {
+      "ar": [
+        "avo",
+        "avi",
+        "ava",
+        "avamo",
+        "avate",
+        "avano"
+      ],
+      "er": [
+        "evo",
+        "evi",
+        "eva",
+        "evamo",
+        "evate",
+        "evano"
+      ],
+      "ir": [
+        "ivo",
+        "ivi",
+        "iva",
+        "ivamo",
+        "ivate",
+        "ivano"
+      ]
+    },
+    "CONTENT_IMPERFECT_STEM_ENDINGS#1": [
+      "o",
+      "i",
+      "a",
+      "amo",
+      "ate",
+      "ano"
+    ],
+    "CONTENT_CONDITIONAL_ENDINGS#1": [
+      "ei",
+      "esti",
+      "ebbe",
+      "emmo",
+      "este",
+      "ebbero"
+    ],
+    "CONTENT_SPEECH_VOWEL_MAPPING#1": {
+      "a": "ah",
+      "e": "eh",
+      "i": "ee",
+      "o": "oh",
+      "u": "oo"
+    },
+    "CONTENT_BADGE_ROME#1": "Roma done",
+    "CONTENT_PAST_EXPLANATION#1": "Passato prossimo = ho or sono + participle. Movement and change verbs use sono and agree with the subject (sono andato, sono andata).",
+    "CONTENT_GRAMMAR_CLASSIFICATION_PAST#1": "passato|past",
+    "CONTENT_SPEECH_RESPELL_RULES#1": [
+      [
+        "à",
+        "g",
+        "a"
+      ],
+      [
+        "[èé]",
+        "g",
+        "e"
+      ],
+      [
+        "ì",
+        "g",
+        "i"
+      ],
+      [
+        "[òó]",
+        "g",
+        "o"
+      ],
+      [
+        "[ùú]",
+        "g",
+        "u"
+      ],
+      [
+        "gli(?=[aeiou])",
+        "g",
+        "LY"
+      ],
+      [
+        "gli",
+        "g",
+        "LYEE"
+      ],
+      [
+        "gn",
+        "g",
+        "NY"
+      ],
+      [
+        "sci(?=[aou])",
+        "g",
+        "SH"
+      ],
+      [
+        "sc(?=[ei])",
+        "g",
+        "SH"
+      ],
+      [
+        "sch",
+        "g",
+        "SK"
+      ],
+      [
+        "ch(?=[ei])",
+        "g",
+        "K"
+      ],
+      [
+        "gh(?=[ei])",
+        "g",
+        "G"
+      ],
+      [
+        "cci(?=[aou])",
+        "g",
+        "TCH"
+      ],
+      [
+        "cc(?=[ei])",
+        "g",
+        "TCH"
+      ],
+      [
+        "ci(?=[aou])",
+        "g",
+        "CH"
+      ],
+      [
+        "c(?=[ei])",
+        "g",
+        "CH"
+      ],
+      [
+        "ggi(?=[aou])",
+        "g",
+        "DJ"
+      ],
+      [
+        "gg(?=[ei])",
+        "g",
+        "DJ"
+      ],
+      [
+        "gi(?=[aou])",
+        "g",
+        "J"
+      ],
+      [
+        "g(?=[ei])",
+        "g",
+        "J"
+      ],
+      [
+        "zz|z",
+        "g",
+        "TS"
+      ],
+      [
+        "qu",
+        "g",
+        "KW"
+      ],
+      [
+        "c",
+        "g",
+        "K"
+      ],
+      [
+        "h",
+        "g",
+        ""
+      ],
+      [
+        "([bdfgklmnprstv])\\1",
+        "g",
+        "$1"
+      ]
+    ],
+    "CONTENT_REGULAR_CONJUGATION#1": {
+      "suffixes": [
+        "are",
+        "ere",
+        "ire"
+      ],
+      "iscPresent": [
+        "isco",
+        "isci",
+        "isce",
+        "iamo",
+        "ite",
+        "iscono"
+      ],
+      "futureEndings": [
+        "ò",
+        "ai",
+        "à",
+        "emo",
+        "ete",
+        "anno"
+      ],
+      "futureStem": {
+        "are": "er",
+        "ere": "er",
+        "ire": "ir"
+      },
+      "pastParticiples": {
+        "are": "ato",
+        "ere": "uto",
+        "ire": "ito"
+      }
+    },
+    "CONTENT_VERB_LAB_PLACEHOLDER#1": "e.g. cantare, vendere, partire",
+    "CONTENT_LEXICON_2f5878123956262e#1": [
+      "questo",
+      "questa",
+      "quello",
+      "quella"
+    ],
+    "CONTENT_LEXICON_040232fe7f4b87d7#1": [
+      "o",
+      "i",
+      "a",
+      "iamo",
+      "ate",
+      "ano"
+    ],
+    "CONTENT_LEXICON_8582fdb9a5c14747#1": [
+      "o",
+      "i",
+      "e",
+      "iamo",
+      "ite",
+      "ono"
+    ],
+    "CONTENT_LEXICON_eff7795a043e2ee9#1": [
+      "ò",
+      "ai",
+      "à",
+      "emo",
+      "ete",
+      "anno"
+    ],
+    "CONTENT_LEXICON_abb0cd80d50efc59#1": [
+      "erò",
+      "erai",
+      "erà",
+      "eremo",
+      "erete",
+      "eranno"
+    ],
+    "CONTENT_LEXICON_a99938c3b0b37b39#1": [
+      "irò",
+      "irai",
+      "irà",
+      "iremo",
+      "irete",
+      "iranno"
+    ],
+    "CONTENT_LEXICON_35ec6a656a3b149c#1": [
+      "pizza",
+      "pasta",
+      "caffe",
+      "acqua",
+      "panino",
+      "insalata",
+      "risotto",
+      "spaghetti",
+      "lasagne",
+      "tavolo",
+      "menu"
+    ],
+    "CONTENT_LEXICON_921fdaadb783ca48#1": [
+      "prenotazione",
+      "camera",
+      "nome"
+    ],
+    "CONTENT_LEXICON_29073a82b82b7487#1": [
+      "vorrei",
+      "prendo",
+      "desidero",
+      "ordino",
+      "posso",
+      "voglio"
+    ],
+    "CONTENT_LEXICON_d9eb1b072cdf53fb#1": [
+      "pizza",
+      "pasta",
+      "caffe",
+      "acqua",
+      "panino",
+      "insalata",
+      "risotto",
+      "spaghetti",
+      "lasagne"
+    ],
+    "CONTENT_LEXICON_7c912a9f6d562be0#1": [
+      "carta",
+      "contanti",
+      "bancomat"
+    ],
+    "CONTENT_LEXICON_f2ac0486d19f4467#1": [
+      "pago",
+      "pagare",
+      "preferisco",
+      "con"
+    ],
+    "CONTENT_LEXICON_50e22739c9073e1b#1": [
+      "prenotazione",
+      "camera",
+      "nome",
+      "riservato"
+    ],
+    "CONTENT_LEXICON_7c6d8a6e8b625a44#1": [
+      "non",
+      "nessun",
+      "nessuna",
+      "mai"
+    ],
+    "CONTENT_LEXICON_d1ba9d5a7ede7234#1": [
+      "non",
+      "senza",
+      "nessun",
+      "nessuna",
+      "mai",
+      "niente"
+    ],
+    "CONTENT_DIALOGUE_INTENT_LEXICON#1": {
+      "restaurant": {
+        "0": [
+          [
+            "vorrei",
+            "prendo",
+            "desidero",
+            "ordino",
+            "posso",
+            "voglio"
+          ],
+          [
+            "pizza",
+            "pasta",
+            "caffe",
+            "acqua",
+            "panino",
+            "insalata",
+            "risotto",
+            "spaghetti",
+            "lasagne"
+          ]
+        ],
+        "3": [
+          [
+            "carta",
+            "contanti",
+            "bancomat"
+          ],
+          [
+            "pago",
+            "pagare",
+            "preferisco",
+            "con"
+          ]
+        ]
+      },
+      "station_0": [
+        "vorrei",
+        "vado",
+        "andare",
+        "biglietto",
+        "desidero",
+        "partire"
+      ],
+      "hotel_0": [
+        "prenotazione",
+        "camera",
+        "nome",
+        "riservato"
+      ]
+    },
+    "CONTENT_DIALOGUE_FILLER_WORDS#1": [
+      "grazie",
+      "prego",
+      "buongiorno",
+      "ciao",
+      "si",
+      "no",
+      "per",
+      "favore",
+      "molto",
+      "bene",
+      "oggi",
+      "domani"
+    ],
+    "CONTENT_TUTOR_GREETINGS#1": {
+      "today": "Oggi",
+      "welcomePrefix": "Pronto per oggi"
+    },
+    "CONTENT_BRANCH_DIALOGUE_TEMPLATES#1": {
+      "restaurantDish": "Ottima scelta, {dish}! Vuole anche qualcosa da bere?",
+      "stationDestination": "Per {destination}, preferisce solo andata o andata e ritorno?",
+      "hotelRoom": "Per la sua {room}, preferisce una camera tranquilla?",
+      "stationPlatform": "Il treno per {destination} parte dal binario cinque. Ha altre domande?"
+    },
+    "CONTENT_MARKET_PHRASE_JOINERS#1": {
+      "request": "Vorrei ",
+      "and": " e "
+    },
+    "CONTENT_POLITENESS_INSTRUCTION#1": "Use vorrei (I would like), potrei (I could), dovrei (I should) to sound polite.",
+    "CONTENT_STORY_BRANCH_TEMPLATES#1": {
+      "cafe": "Il barista prepara {item} e domanda: «Vuole anche qualcosa da mangiare?»",
+      "train": "«Per {destination}, preferisce il viaggio di mattina o di pomeriggio?»",
+      "tea": "il tè",
+      "meeting": "riunione",
+      "completed": "Storia completata!"
+    }
   },
   "contentArchitecture": {
-    "content": "data.json: Italian lessons, reference vocabulary, phrases, dialogs, prompts and quiz datasets",
-    "app": "index.html: presentation, exercise generation, navigation, offline application logic",
-    "personal": "me.json or browser local storage: personal progress; never committed into public data.json",
-    "note": "Serve via localhost or HTTPS: browsers block fetch of data.json from file:// in most configurations."
+    "content": "data.json: curriculum, lessons, references, Italian text, examples, language patterns and audio samples",
+    "app": "index.html: UI, navigation, rendering, calculations, exercise and feedback algorithms",
+    "personal": "me.json/local browser storage: personal progress (not included in public package)",
+    "note": "Keep HTML and JSON deployed together. Offline mode needs a prior successful PWA load via HTTPS/localhost."
   }
 }
