@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#0B6B3A"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><title>Parlo · Learn Italian</title>
+<meta name="theme-color" content="#0B6B3A"><link rel="icon" type="image/png" href="./icons/favicon.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><title>Parlo · Learn Italian</title>
 <style>
 :root{--bg:#FBF5EA;--bg2:#F1E7D3;--card:#fff;--ink:#241B14;--mut:#8C7C6A;--g:#0E8A4B;--gd:#096B3A;--gl:#e3f5ea;--r:#E4382F;--rd:#B82820;--y:#FFC83D;--yd:#D9A21B;--b:#3D8BFF;--line:#E9DCC3;--sh:0 0.375rem 0 rgba(36,27,20,.07),0 0.875rem 1.875rem rgba(36,27,20,.07);--hd1:#0B6B3A;--hd2:#18a35a}
 body.night{--bg:#14111C;--bg2:#1E1A2B;--card:#262136;--ink:#F6EFE3;--mut:#A79DB8;--line:#3A334F;--sh:0 0.375rem 0 rgba(0,0,0,.35);--gl:#1d3a2b}
@@ -5660,4 +5660,60 @@ parlo12Styles.textContent=`
 #top{min-width:0}#top>*{min-width:0}#top button{flex-shrink:0}
 @media(max-width:450px){#top>.chip:not(button){display:none!important}#top .logo{flex:none}#top .sp{flex:1;min-width:0}#top{gap:.35rem}}
 `;document.head.appendChild(parlo12Styles);
+
+
+/* Public 1.3 — compact search, restored streak, scoped audio feedback, card separation. */
+const p13Style=document.createElement('style');
+p13Style.textContent=`
+/* Keep the streak visible even on mobile; remove the old language flag from the header. */
+@media(max-width:450px){#top>.chip.p13-streak{display:inline-flex!important;align-items:center;gap:.15rem;padding:.27rem .35rem!important;font-size:.75rem!important}#top .logo{font-size:.92rem!important}#top .logo i{width:1.6rem!important;height:1.6rem!important}#top .p11-search-trigger{width:1.95rem;height:1.95rem}#top .chip.ib{padding:.25rem!important}}
+/* Search category labels must be centered and not clipped by inheritance. */
+.p11-search-filters{align-items:center;gap:.42rem;min-height:3.1rem;padding-top:.25rem!important;padding-bottom:.45rem!important;flex-shrink:0}
+.p11-search-filters button{box-sizing:border-box;display:inline-flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;line-height:1.1!important;white-space:nowrap;min-height:2rem;padding:.42rem .82rem!important;font-size:.75rem!important;font-weight:800!important;flex:0 0 auto!important;vertical-align:middle}
+.p11-search-field input:focus-visible{outline:0!important;box-shadow:none!important}
+.p11-search-field:focus-within{box-shadow:0 0 0 3px color-mix(in srgb,var(--g) 17%,transparent)}
+.p11-results-head{align-items:center;gap:.65rem;min-width:0}.p11-results-head>*{min-width:0}
+/* The hero shadow should fall behind other cards instead of over them. */
+#main .view>.hero{isolation:isolate;z-index:0;margin-bottom:1.15rem!important}
+#main .view>.hero~.p221-quick,#main .view>.hero~.pl-shortcuts,#main .view>.hero~.pl-tools,#main .view>.hero~.card,#main .view>.hero~.mg{position:relative;z-index:1}
+#main .view>.hero + .pl-shortcuts,#main .view>.hero + .pl-tools,#main .view>.hero + .p221-quick{margin-top:.6rem!important}
+/* Grammar Guides: only the selected speaker icon moves, never its full example card. */
+#main .view .card .opt.p13-grammar-audio{animation:none!important;transform:none!important;transition:background-color .15s,border-color .15s!important}
+#main .view .card .opt.p13-grammar-audio svg.p13-audio-playing{animation:p13-speaker-pop .65s ease-in-out 1!important;color:var(--g);transform-origin:center}
+@keyframes p13-speaker-pop{0%,100%{transform:scale(1)}45%{transform:scale(1.22)}}
+@media(prefers-reduced-motion:reduce){#main .view .card .opt.p13-grammar-audio svg.p13-audio-playing{animation:none!important}}
+`;document.head.appendChild(p13Style);
+// The prior layout intentionally hid all non-button chips on phones. Reintroduce just the streak.
+const p13Topbar=topbar;
+topbar=function(){p13Topbar.apply(this,arguments);const t=document.getElementById('top');if(!t)return;
+  const language=t.querySelector('button[onclick="langSheet()"]');if(language)language.remove();
+  const flame=[...t.querySelectorAll('.chip')].find(el=>!el.matches('button')&&!!el.querySelector('svg'));
+  if(flame)flame.classList.add('p13-streak');
+};
+// Language selection belongs to Me, not the crowded header.
+const p13MeGroups=meGroups;
+meGroups=function(){p13MeGroups.apply(this,arguments);const root=document.querySelector('#main .mg');if(!root||root.querySelector('.p13-language'))return;
+  const group=document.createElement('div');group.className='p13-language';
+  const btn=document.createElement('button');btn.className='r';btn.setAttribute('aria-label','I want to learn');
+  btn.innerHTML=`<span class="ib">${ic('languages',21)}</span><span class="t">I want to learn</span><span class="chv">${ic('chevron-right',20)}</span>`;
+  btn.onclick=langSheet;group.append(btn);root.append(group);
+};
+// The Path already has learning actions elsewhere, and Me has the three shortcut actions.
+const p13Path=vPath;
+vPath=function(){p13Path.apply(this,arguments);const v=document.querySelector('#main .view');v?.querySelectorAll(':scope > .p221-quick').forEach(el=>el.remove())};
+// Fix the audio status scope for every Grammar Guide's example button.
+const p13Listen=parlo12Listen;
+parlo12Listen=function(button,text){
+  if(button?.classList?.contains('opt')&&button.closest('#main .view .card')){
+    document.querySelectorAll('.p13-audio-playing').forEach(el=>el.classList.remove('p13-audio-playing'));
+    button.classList.add('p13-grammar-audio');
+    const icon=button.querySelector('svg');if(icon){icon.classList.remove('p13-audio-playing');void icon.getBoundingClientRect();icon.classList.add('p13-audio-playing');
+      if(window.p13AudioTimer)clearTimeout(window.p13AudioTimer);
+      window.p13AudioTimer=setTimeout(()=>{if(icon.isConnected)icon.classList.remove('p13-audio-playing')},850);
+    }
+    try{speak(text)}catch(error){console.warn('Parlo audio:',error);if(typeof toast==='function')toast('Audio unavailable','alert-triangle')}
+    return;
+  }
+  return p13Listen(button,text);
+};
 </script></body></html>

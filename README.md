@@ -66,3 +66,11 @@ For installation, open the hosted HTTPS URL, then accept the install prompt wher
 - Text scale: S 14px, M 16.5px, L 18px, XL 19px.
 - Word Pack listen buttons play the selected Italian word.
 - Grammar Guides animate only the tapped audio example.
+
+
+## Public 1.3 changes
+- Shows the streak in the mobile header; the language selector is now under Me.
+- Search category chips are centered and input focus styling is cleaner.
+- Grammar guide listening animates only the tapped speaker icon.
+- Removed duplicate Home learning shortcut trio; adjusted spacing in Me and Speak.
+- Icon now uses a transparent PNG outside its rounded artwork.
