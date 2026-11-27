@@ -3040,11 +3040,11 @@ function p206CoachCandidates(minutes){
  const strengths=PL_SKILLS.map(skill=>({skill,...p206Measure(skill)}));
  const weakest=strengths.filter(s=>s.n>=4).sort((a,b)=>(a.accuracy??100)-(b.accuracy??100))[0];
  const topics=PL_GRAMMAR.map(g=>({g,e:p206Measure('grammar',g.id)})).filter(x=>x.e.n>=2).sort((a,b)=>(a.e.accuracy??100)-(b.e.accuracy??100));
- const grammar=topics[0]?.g||PL_GRAMMAR[0],focus=P205.coach.focus||'auto',next=curNode();
+ const grammar=topics[0]?.g||PL_GRAMMAR[0]||{},focus=P205.coach.focus||'auto',next=curNode();
  const list=[
   {kind:'Review',min:4,title:due?__t("review_overdue_words",Math.min(due,12)):__t("vocabulary_retrieval"),reason:due?__t("words_are_scheduled_for_recall",due):__t("build_long_term_word_retention"),action:'closeSheet();go("cards")',priority:due?105:45},
   {kind:'Fix',min:4,title:__t("repair_repeated_mistakes"),reason:__t("recurring_error_groups",recurring.length),action:'v194MistakeHub()',priority:recurring.length?100:15},
-  {kind:'Grammar',min:5,title:__t("practise",grammar.title),reason:topics.length?__t("recent_accuracy",topics[0].e.accuracy):__t("build_grammar_production_and_accuracy"),action:`plGrammarRun('${grammar.id}')`,priority:weakest?.skill==='grammar'?96:65},
+  ...(PL_GRAMMAR.length?[{kind:'Grammar',min:5,title:__t("practise",grammar.title),reason:topics.length?__t("recent_accuracy",topics[0].e.accuracy):__t("build_grammar_production_and_accuracy"),action:`plGrammarRun('${grammar.id}')`,priority:weakest?.skill==='grammar'?96:65}]:[]),
   {kind:'Read',min:4,title:__t("read_and_understand_a_story"),reason:__t("develop_contextual_comprehension"),action:'v187ReadingSheet()',priority:weakest?.skill==='reading'?95:48},
   {kind:'Speak',min:5,title:__t("complete_an_dialogue"),reason:''+__t("practice_responsive_language_typed_replies_assess")+'',action:'plConversationSheet()',priority:weakest?.skill==='speaking'?90:50},
   {kind:'Write',min:4,title:__t("produce_a_written_response"),reason:__t("use_a_guided_prompt_without_automatic"),action:'v194WritingHub()',priority:weakest?.skill==='writing'?90:46},
