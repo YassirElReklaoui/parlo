@@ -1428,7 +1428,7 @@ const _build=build;
 build=function(u,li){if(li<3||li===7)return _build(u,li===7?3:li);const U=UNITS[u],ws=U.w,q=[];const mc=(w,d)=>({t:'mc',w,d}),ls=w=>({t:'listen',w}),ty=(w,d)=>({t:'type',w,d});
  if(li===3){shuf(ws).slice(0,8).forEach(w=>q.push(ls(w)));shuf(U.p).forEach(p=>q.push({t:'bank',p,d:'listen'}));q.push(ty(rnd(ws),'listen'))}
  else if(li===4){shuf(ws).slice(0,8).forEach((w,i)=>q.push(i%3===2?mc(w,'it2m'):ty(w,'m2it')));q.push(ty(rnd(ws),'listen'))}
- else if(li===5){const a=shuf(ws);q.push({t:__t("match"),ws:a.slice(0,5)});if(a.length>5)q.push({t:__t("match"),ws:a.slice(5,10)});shuf(ws).slice(0,4).forEach(w=>q.push(mc(w,'m2it')));q.push({t:__t("match"),ws:shuf(ws).slice(0,5)});shuf(ws).slice(0,3).forEach(w=>q.push(mc(w,'it2m')))}
+ else if(li===5){const a=shuf(ws);q.push({t:'match',ws:a.slice(0,5)});if(a.length>5)q.push({t:'match',ws:a.slice(5,10)});shuf(ws).slice(0,4).forEach(w=>q.push(mc(w,'m2it')));q.push({t:'match',ws:shuf(ws).slice(0,5)});shuf(ws).slice(0,3).forEach(w=>q.push(mc(w,'it2m')))}
  else if(li===6){shuf(U.p).forEach(p=>q.push({t:'bank',p,d:'en2it'}));shuf(U.p).forEach(p=>q.push({t:'bank',p,d:'it2en'}));shuf(U.p).forEach(p=>q.push({t:'bank',p,d:'listen'}));shuf(ws).slice(0,3).forEach(w=>q.push(mc(w,'m2it')))}
  else if(li===8){shuf(ws).forEach((w,i)=>q.push(mc(w,i%2?'m2it':'it2m')));shuf(ws).slice(0,5).forEach(w=>q.push(mc(w,'m2it')))}
  return q.map(ex=>{
@@ -1584,7 +1584,7 @@ WN.unshift(['v108',__t("one_main_translation_optional_small_languages")]);
 /* ===== v110: 4 extra words per unit (152 words) ===== */
 const XW=__D.g("XW#1");
 UNITS.forEach((U,ui)=>{const t=XW[U.id];if(!t)return;t.trim().split('\n').forEach(l=>{const p=l.split('|');if(U.w.some(w=>w.it===p[0]))return;const w=Object.assign(xs(p,4),{it:p[0],i:'abc',en:p[1],fr:p[2],ar:p[3],extra:1});w.id=U.id+'.'+U.w.length;w.u=ui;U.w.push(w);ALL.push(w);BYID[w.id]=w})});
-const _b110=build;build=function(u,li){if(li!==7)return _b110(u,li);const U=UNITS[u],ex=U.w.filter(w=>w.extra);if(!ex.length)return _b110(u,li);const q=[];ex.forEach(w=>q.push({t:'intro',w}));shuf(ex).forEach(w=>q.push({t:'mc',w,d:'it2m'}));q.push({t:__t("match"),ws:ex});shuf(ex).forEach((w,i)=>q.push(i%2?{t:'listen',w}:{t:'mc',w,d:'m2it'}));q.push({t:'listen',w:rnd(ex)});return q.concat(_b110(u,li).slice(0,6))};
+const _b110=build;build=function(u,li){if(li!==7)return _b110(u,li);const U=UNITS[u],ex=U.w.filter(w=>w.extra);if(!ex.length)return _b110(u,li);const q=[];ex.forEach(w=>q.push({t:'intro',w}));shuf(ex).forEach(w=>q.push({t:'mc',w,d:'it2m'}));q.push({t:'match',ws:ex});shuf(ex).forEach((w,i)=>q.push(i%2?{t:'listen',w}:{t:'mc',w,d:'m2it'}));q.push({t:'listen',w:rnd(ex)});return q.concat(_b110(u,li).slice(0,6))};
 WN.unshift(['v110',__t("4_new_words_in_every_unit")]);
 /* ===== v109 placement test, v111 long listening, v112 advanced talks ===== */
 const PTQ=__D.g("PTQ#1");
@@ -2231,14 +2231,14 @@ function others(w,n=3){const pool=ALL.filter(x=>x.id!==w.id&&x.u===w.u),rest=ALL
 function build(u,li){const U=UNITS[u],ws=U.w,q=[];
  const mc=(w,d)=>({t:'mc',w,d}),ls=w=>({t:'listen',w}),ty=(w,d)=>({t:'type',w,d});
  if(li<2){const it=ws.slice(li*5,li*5+5);it.forEach(w=>q.push({t:'intro',w}));
-  shuf(it).forEach(w=>q.push(mc(w,'it2m')));q.push({t:__t("match"),ws:it});
+  shuf(it).forEach(w=>q.push(mc(w,'it2m')));q.push({t:'match',ws:it});
   const kinds=[w=>mc(w,'m2it'),ls,w=>ty(w,'m2it'),w=>mc(w,'m2it'),ls];shuf(it).forEach((w,i)=>q.push(kinds[i%5](w)));
   q.push(ty(rnd(it),'listen'))}
  else if(li===2){const P=U.p;const m=shuf(P).map(p=>({t:'bank',p,d:'en2it'}));const n=shuf(P).map(p=>({t:'bank',p,d:'listen'}));const k=shuf(P).map(p=>({t:'bank',p,d:'it2en'}));
   q.push(...m,...shuf(n.concat(k)));shuf(ws).slice(0,3).forEach(w=>q.splice(1+Math.floor(Math.random()*q.length),0,mc(w,rnd(['it2m','m2it']))))}
  else{let pool=ws.slice();if(u>0)pool=pool.concat(shuf(UNITS[u-1].w).slice(0,3));pool=shuf(pool).slice(0,8);
   const kinds=[w=>mc(w,'it2m'),ls,w=>ty(w,'m2it'),w=>mc(w,'m2it'),w=>ty(w,'listen'),ls,w=>mc(w,'it2m'),w=>ty(w,'m2it')];pool.forEach((w,i)=>q.push(kinds[i](w)));
-  q.push({t:__t("match"),ws:shuf(ws).slice(0,5)});q.push({t:'bank',p:rnd(U.p),d:'en2it'});q.push({t:'bank',p:rnd(U.p),d:'listen'})}
+  q.push({t:'match',ws:shuf(ws).slice(0,5)});q.push({t:'bank',p:rnd(U.p),d:'en2it'});q.push({t:'bank',p:rnd(U.p),d:'listen'})}
  return q.map(ex=>{
   if(ex.t==='type'&&!C.typing)return ex.d==='listen'&&C.listening?{t:'listen',w:ex.w}:{t:'mc',w:ex.w,d:'m2it'};
   if(ex.t==='type'&&ex.d==='listen'&&!C.listening)return{t:'type',w:ex.w,d:'m2it'};
@@ -4888,6 +4888,14 @@ html[dir="rtl"] .bub,html[dir="rtl"] .word,html[dir="rtl"] .v187-wodword,html[di
 html[dir="rtl"] input[type="search"],html[dir="rtl"] input[placeholder]{text-align:start}
 
 
+/* v262 chips and rows */
+.pl-time{gap:.625rem!important}
+.pl-shortcuts{gap:.625rem!important;padding:.75rem .875rem!important}
+.v194-shortcuts{gap:.625rem!important;padding:.75rem .3rem!important}
+.pl-topic{margin:.125rem 0}
+.pl-link{margin:.5rem 0!important}
+.pl-list{gap:.625rem}
+.sw{gap:.5rem;flex-wrap:wrap}
 </style>
 <script type="text/plain" data-parlo-app id="course-chip-js">
 /* Course chip: flag plus course code and current level (for example IT · A1). It opens the course switcher. */
