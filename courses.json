@@ -1,1 +1,28 @@
-{"courses": [{"code": "it", "name": "Italiano", "flag": "it", "status": "ready"}, {"code": "es", "name": "Espa\u00f1ol", "flag": "es", "status": "ready"}]}
+{
+ "courses": [
+  {
+   "code": "it",
+   "name": "Italiano",
+   "flag": "it",
+   "status": "ready",
+   "names": {
+    "en": "Italian",
+    "fr": "italien",
+    "ar": "الإيطالية",
+    "es": "italiano"
+   }
+  },
+  {
+   "code": "es",
+   "name": "Español",
+   "flag": "es",
+   "status": "ready",
+   "names": {
+    "en": "Spanish",
+    "fr": "espagnol",
+    "ar": "الإسبانية",
+    "es": "español"
+   }
+  }
+ ]
+}
