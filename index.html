@@ -287,6 +287,18 @@ body.night .parlo-unit-card .puc-foot{background:color-mix(in srgb,var(--card) 8
 body.night .parlo-unit-card .puc-copy p,body.night .parlo-unit-card .puc-progress-label{color:var(--mut)}
 body.night .parlo-unit-card .puc-art{border-color:color-mix(in srgb,var(--unit-accent) 32%,var(--line))}
 @media(max-width:370px){body .parlo-unit-card .puc-inner{padding:.84rem .8rem}body .parlo-unit-card .puc-main{grid-template-columns:3.2rem minmax(0,1fr);gap:.7rem}body .parlo-unit-card .puc-art{width:3.2rem;height:3.2rem;border-radius:.95rem}body .parlo-unit-card .puc-art svg{width:1.85rem;height:1.85rem}body .parlo-unit-card .puc-copy h3{font-size:1.27rem}body .parlo-unit-card .puc-foot{padding:.72rem}}
+
+/* v261 spacing: listen/slow buttons, answer lists, bottom bar */
+.saybtn{display:flex;align-items:center;justify-content:center;gap:1.125rem;margin:0.75rem 0 1.5rem}
+.saybtn .btn{flex:none;padding:0;display:grid;place-items:center;width:6rem;height:6rem;border-radius:50%!important}
+.saybtn .btn.slowb{width:3.75rem;height:3.75rem;background:#6B7280!important;box-shadow:0 0.3125rem 0 #4b5563!important}
+.spkrow{gap:1.125rem;margin:1rem 0 1.25rem;flex-wrap:wrap}
+.spkrow .spk{flex:none;border-radius:50%!important}
+.opts{gap:0.875rem;margin-top:1rem}
+.opt{min-height:3.5rem}
+#foot{display:flex;flex-direction:column;gap:0.5rem}
+#foot .btn{margin:0}
+@media(min-width:48rem){#stage{padding-left:max(1.25rem,calc(50% - 20rem));padding-right:max(1.25rem,calc(50% - 20rem))}#foot{padding-left:max(1.25rem,calc(50% - 20rem));padding-right:max(1.25rem,calc(50% - 20rem))}}
 </style></head><body>
 <div id="app">
  <div id="top"></div>
@@ -1330,7 +1342,7 @@ mkLab(__D.g("mkLab#11"));
 mkLab(__D.g("mkLab#12"));
 /* ===== v73 word of the day, v74 memory boxes, v75 stories, v76 more dialogues ===== */
 function dailyWordPick(){return parloDailyWordPick()}
-function dailyWord(){const w=dailyWordPick(),done=!!(S.dwd||{})[today()],lv=UNITS[w.u]?.lv||'A1';ovl(`<div class="v187-word-modal"><span class="pill">${__t("word_of_the_day_2",ic('sparkles',15),lv)}</span><div class="v187-word-modalhero"><div class="v187-word-modalword">${esc(w.it)}</div><div class="v187-word-modalmeaning">${esc(M(w))}</div><button class="v187-wodspk" style="display:inline-grid;margin:.75rem auto 0" onclick="speak('${sq(w.it)}')" aria-label="${__t("hear_word")}">${ic('volume',24)}</button></div><p class="sub" style="margin:1rem 0">${__t("from_your_vocabulary",lv,esc(UNITS[w.u]?.it||__t("words_3")))}</p><button class="btn" ${done?__t("disabled"):''} onclick="dwAdd('${w.id}')">${done?ic('check',20)+' '+__t("learned_today")+'':ic('plus',20)+' '+__t("add_to_my_vocabulary")+''}</button><p class="sub" style="margin-top:.9rem">${__t("tomorrow_brings_a_new_word_studied",lv)}</p></div>`,''+__t("word_of_the_day_p2")+'')}
+function dailyWord(){const w=dailyWordPick(),done=!!(S.dwd||{})[today()],lv=UNITS[w.u]?.lv||'A1';ovl(`<div class="v187-word-modal"><span class="pill">${__t("word_of_the_day_2",ic('sparkles',15),lv)}</span><div class="v187-word-modalhero"><div class="v187-word-modalword">${esc(w.it)}</div><div class="v187-word-modalmeaning">${esc(M(w))}</div><button class="v187-wodspk" style="display:inline-grid;margin:.75rem auto 0" onclick="speak('${sq(w.it)}')" aria-label="${__t("listen")}">${ic('volume',24)}</button></div><p class="sub" style="margin:1rem 0">${__t("from_your_vocabulary",lv,esc(UNITS[w.u]?.it||__t("words_3")))}</p><button class="btn" ${done?__t("disabled"):''} onclick="dwAdd('${w.id}')">${done?ic('check',20)+' '+__t("learned_today")+'':ic('plus',20)+' '+__t("add_to_my_vocabulary")+''}</button><p class="sub" style="margin-top:.9rem">${__t("tomorrow_brings_a_new_word_studied",lv)}</p></div>`,''+__t("word_of_the_day_p2")+'')}
 function dwAdd(id){S.dwd=S.dwd||{};if(S.dwd[today()]){toast(__t("already_done_today"),'check');return}S.dwd[today()]=1;S.dwn=(S.dwn||0)+1;try{touch(id,true)}catch(e){}addXp(10);save();checkBadges();toast(__t("10_xp"),'check');dailyWord()}
 function boxSheet(){closeSheet();const b=[0,0,0,0,0,0];Object.values(S.w).forEach(w=>{if(w.ok+w.bad>0)b[Math.min(5,w.box||0)]++});const mx=Math.max(1,...b),nm=['New',__t("weak"),__t("learning_3"),__t("good"),__t("strong"),__t("mastered")],cl=['#E4382F','#E57A1F','#E39A00','#7FBF3A','#2fc46f','#0E8A4B'];
  ovl(`<p class="sub" style="text-align:center">${__t("every_word_lives_in_a_box")}</p><div style="display:flex;align-items:flex-end;gap:0.5rem;height:9.375rem;margin:1rem 0 0.375rem">${b.map((n,i)=>`<button onclick="boxQuiz(${i})" style="flex:1;border:0;background:none;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font:inherit;color:inherit;font-weight:900;height:100%"><span>${n}</span><span style="width:100%;height:${Math.max(6,n/mx*110)}px;background:${cl[i]};border-radius:0.625rem 0.625rem 0.25rem 0.25rem"></span></button>`).join('')}</div><div style="display:flex;gap:0.5rem;font-size:0.625rem;font-weight:800;text-align:center">${nm.map(n=>`<span style="flex:1">${n}</span>`).join('')}</div>`,__t("memory_boxes"))}
@@ -2242,7 +2254,7 @@ $('#lx').innerHTML=ic('x',24);
 $('#lx').onclick=()=>{if(L&&L.i>0&&L.i<L.q.length&&L.lives>0){const s=sheet(`<div style="text-align:center">${mascot('sad')}<h2 style="margin:0;justify-content:center">${__t("leave_the_lesson")}</h2><p class="sub">${__t("you_will_lose_this_lesson_s")}</p><button class="btn" id="stay">${__t("keep_going")}</button><br><button class="btn ghost" id="quit">${__t("quit")}</button></div>`);$('#stay').onclick=()=>s.remove();$('#quit').onclick=()=>{s.remove();closeLes()}}else closeLes()};
 function heartsHtml(){if(L.unl)return`${icf('heart',22)}<span>&infin;</span>`;let h='';for(let i=0;i<L.max;i++)h+=icf('heart',22,i<L.lives?'':'off');return h}
 function setBtn(txt,en=true,cls=''){const b=$('#go');b.textContent=txt;b.disabled=!en;b.className='btn '+cls}
-function render(){const ex=L.q[L.i];CURX={ex,val:null,ans:null};MODE='check';$('#foot').className='';$('#fb').innerHTML='';$('#lb').style.width=(L.i/L.q.length*100)+'%';$('#hearts').innerHTML=heartsHtml();$('#stage').scrollTop=0;$('#stage').innerHTML='';R[ex.t](ex)}
+function render(){const ex=L.q[L.i];CURX={ex,val:null,ans:null};MODE='check';$('#foot').className='';$('#fb').innerHTML='';$('#lb').style.width=(L.i/L.q.length*100)+'%';$('#hearts').innerHTML=heartsHtml();$('#stage').scrollTop=0;$('#stage').innerHTML='';R[ex.t](ex);{const g=$('#go');if(g&&ex.t!=='match'&&$$('.opt').length&&!g.textContent.trim())setBtn(__t("check_3"),false)}}
 const st=h=>$('#stage').innerHTML=h;
 const spkBtns=(t,big)=>`<div class="spkrow"><button class="spk ${big?__t("big"):''}" onclick="speak('${sq(t)}')">${ic('volume',big?46:30)}</button><button class="spk slow" onclick="speak('${sq(t)}',1)">${ic('volume',20)}<span>${__t("slow")}</span></button></div>`;
 function optsHtml(list){return`<div class="opts">${list.map((o,i)=>`<button class="opt" data-i="${i}" ${o.ar?'dir="auto"':''} onclick="pickOpt(this)"><span>${esc(o.l)}</span></button>`).join('')}</div>`}
@@ -2270,7 +2282,7 @@ bank(ex){const p=ex.p,d=ex.d,tgt=d==='it2en'?p[1]:p[0],toks=tgt.split(' ');const
  const upd=()=>{CURX.val=[...$$('#tray .tile')].map(x=>x.textContent).join(' ');setBtn(__t("check_3"),!!$$('#tray .tile').length)};
  CURX.check=()=>{const ok=norm(CURX.val)===norm(tgt);return{ok,ans:tgt+(d==='listen'?'  ('+p[1]+')':'')}}}
 };
-function sayBtn(ex){if(!ex.say)return'';setTimeout(()=>speak(ex.say),250);return`<div style="display:flex;align-items:center;justify-content:center;margin:0.375rem 0 0.75rem"><button class="btn" style="flex:none;width:6rem;height:6rem;border-radius:50%;padding:0;display:grid;place-items:center" onclick="speak('${sq(ex.say)}')">${ic('volume',44)}</button><button class="btn" style="flex:none;width:3.5rem;height:3.5rem;border-radius:50%;padding:0;display:grid;place-items:center;margin-left:0.875rem;background:#6B7280" aria-label="${__t("slow_3")}" onclick="speak('${sq(ex.say)}',1)">${ic('snail',28)}</button></div>`}
+function sayBtn(ex){if(!ex.say)return'';setTimeout(()=>speak(ex.say),250);return`<div class="saybtn"><button class="btn" onclick="speak('${sq(ex.say)}')" aria-label="${__t("listen")}">${ic('volume',44)}</button><button class="btn slowb" aria-label="${__t("slow_3")}" onclick="speak('${sq(ex.say)}',1)">${ic('snail',28)}</button></div>`}
 R.mcx=function(ex){const list=ex.opts.map(l=>({l}));st(`<div class="q">${esc(ex.prompt)}</div>${sayBtn(ex)}${ex.html||''}${ex.sub?`<div class="sub" style="text-align:left;margin:-0.5rem 0 0.5rem">${esc(ex.sub)}</div>`:''}${optsHtml(list)}`);
  CURX.check=()=>{const ok=CURX.val===ex.a;$$('.opt').forEach((b,i)=>{if(i===ex.a)b.classList.add('ok');else if(i===CURX.val&&!ok)b.classList.add('bad')});return{ok,ans:ex.opts[ex.a]+(ex.explain?'  ·  '+ex.explain:'')}}};
 function accVar(a){a=String(a);const o=[a],c=a.split(/\s+[·]\s+/)[0].trim(),m=/^(.+?)(?:\s+(?:=|—|–|-)\s+|\s*:\s+)(.+)$/.exec(c)||/^(.+?)\s+\(([^)]+)\)$/.exec(c);if(c!==a)o.push(c);if(m){o.push(m[1].trim(),m[2].trim())}return o}
