@@ -1,0 +1,12 @@
+{
+ "course": "es",
+ "name": "Español",
+ "base": "es-data.json",
+ "languages": [
+  "en",
+  "fr",
+  "ar"
+ ],
+ "fallback": "en",
+ "tables": []
+}
