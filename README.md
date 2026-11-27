@@ -73,8 +73,8 @@ manifest.webmanifest  PWA manifest
 courses.json          list of courses shown in the course switcher
 languages.json        list of interface languages (en, fr, ar, es)
 i18n/                 interface text: en.json, fr.json, ar.json, es.json
-it_data/              Italian course: it-data.json + it-data.en/fr/ar/es.json
-es_data/              Spanish course: es-data.json + es-data.en/fr/ar/es.json
+it_data/              Italian course: index.json, it-data.json, it-data.en/fr/ar/es.json
+es_data/              Spanish course: index.json, es-data.json, es-data.en/fr/ar/es.json
 icons/                app icons
 fonts/                bundled fonts
 ```
@@ -95,6 +95,7 @@ Not needed on GitHub Pages: `development/`, Python build scripts, and `me.json`.
 Parlo is a template: the app code is generic and each course is a set of JSON files. A course never needs changes in `index.html`.
 
 - `courses.json` lists the courses. Each entry has a `code`, a native `name`, a `flag`, a `status` (`ready` shows the course), and a `names` object with the course name in each interface language.
+- `<code>_data/index.json` tells the app which base file and which translation overlays the course has.
 - `<code>_data/<code>-data.json` is the course base: units, lessons, vocabulary, verbs, dialogues, stories, grammar, game banks, voice settings, and the `learning` section (voice, letters, numbers, `hide` list, and `uiText` overrides).
 - `<code>_data/<code>-data.<ui>.json` are the translation overlays for `en`, `fr`, `ar` and `es`. They fill the meanings and explanations in each interface language. Keys follow the path `modules/NAME#1/index/column`.
 - Progress for each course is stored separately in the browser (`parlo2` for Italian, `parlo2-<code>` for the others).
@@ -102,7 +103,7 @@ Parlo is a template: the app code is generic and each course is a set of JSON fi
 
 ### Add a new course
 
-1. Create `xx_data/` with `xx-data.json` and the four overlay files `xx-data.en.json`, `xx-data.fr.json`, `xx-data.ar.json`, `xx-data.es.json`.
+1. Create `xx_data/` with `index.json` (copy one from an existing course and change the code and name), `xx-data.json` and the four overlay files `xx-data.en.json`, `xx-data.fr.json`, `xx-data.ar.json`, `xx-data.es.json`.
 2. Fill the content. Keep unit and word identifiers stable so saved progress stays valid.
 3. Add the course to `courses.json` with `"status": "ready"`, its flag, native name, and `names` in the four interface languages.
 4. Bump `BUILD` in `sw.js`, upload, and the course shows up in the switcher.
