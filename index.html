@@ -1233,7 +1233,7 @@ function sbDraw(){const s=SB.q[SB.i],toks=s[0].split(' '),bank=SB.bank||(SB.bank
  ovl(`<p class="sub" style="text-align:center">${SB.i+1} / ${SB.q.length}</p><div style="font-size:1.375rem;font-weight:900;text-align:center;margin:0.375rem 0 1rem">${s[1]}</div>
  <div style="min-height:6.75rem;border-radius:1.25rem;border:0.125rem dashed var(--line);padding:0.625rem;display:flex;flex-wrap:wrap;gap:0.5rem;align-content:flex-start">${SB.ans.map((k,j)=>`<button onclick="sbBack(${j})" style="padding:0.625rem 0.875rem;border-radius:0.875rem;border:0.125rem solid #0E8A4B;background:#e3f5ea;color:#096B3A;font:inherit;font-weight:800">${toks[k]}</button>`).join('')}</div>
  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:1rem 0">${bank.map(b=>SB.ans.includes(b[1])?'':`<button onclick="sbAdd(${b[1]})" style="padding:0.625rem 0.875rem;border-radius:0.875rem;border:0.125rem solid var(--line);background:var(--card);color:inherit;font:inherit;font-weight:800">${b[0]}</button>`).join('')}</div>
- <button class="btn" onclick="sbCheck()" ${SB.ans.length<toks.length?'style="opacity:.5"':''}>${__t("check")}</button><button class="btn" style="margin-top:0.5rem;background:var(--mut)" onclick="speak('${sq(s[0])}')">${__t("hear_it",ic('volume',20))}</button>`,__t("sentence_builder"))}
+ <button class="btn" onclick="sbCheck()" ${SB.ans.length<toks.length?'style="opacity:.5"':''}>${__t("check")}</button><button class="btn ghost" style="margin-top:0.875rem" onclick="speak('${sq(s[0])}')">${__t("hear_it",ic('volume',20))}</button>`,__t("sentence_builder"))}
 function sbAdd(k){SB.ans.push(k);sbDraw()}
 function sbBack(j){SB.ans.splice(j,1);sbDraw()}
 function sbCheck(){const s=SB.q[SB.i],toks=s[0].split(' ');if(SB.ans.length<toks.length)return;if(SB.ans.map(k=>toks[k]).join(' ')===s[0]){speak(s[0]);SB.done++;SB.i++;SB.ans=[];SB.bank=null;if(SB.i>=SB.q.length){const r=SB;SB=null;addXp(20+Math.max(0,6-r.bad)*3);if(r.bad<=2){S.gems+=2}S.sbn=(S.sbn||0)+1;save();checkBadges();ovl(`<div style="text-align:center;padding-top:1.875rem"><div style="font-size:3rem;font-weight:900">${r.bad===0?__t("perfect"):__t("done_3")}</div><p class="sub">${__t("6_sentences_mistake",r.bad,r.bad===1?'':'s',r.bad<=2?` ${__t("2_gems")}`:'')}</p><button class="btn" style="margin-top:1rem" onclick="sentGo()">${__t("again_2")}</button><button class="btn" style="margin-top:0.625rem;background:var(--mut)" onclick="ovlClose()">${__t("done_3")}</button></div>`,__t("sentence_builder"));return}toast(__t("correct_2"),'check')}else{SB.bad++;SB.ans=[];toast(__t("not_quite_try_again"),'x')}sbDraw()}
@@ -1291,7 +1291,7 @@ function pmTap(i){const t=PM.tiles[i];if(PM.done[t.k]||PM.sel===i)return;if(t.it
 const _ax=addXp;addXp=function(n){_ax(n);if(n>=8){S.qd=S.qd||{};S.qd[today()]=(S.qd[today()]||0)+1;save()}};
 const _be=blitzEnd;blitzEnd=function(){if(BZ)S.qb=today();_be()};
 const DQ=[[__t("earn_40_xp_today"),'target',()=>dayXp()>=40,()=>Math.min(1,dayXp()/40)],[__t("finish_3_activities"),'check',()=>((S.qd||{})[today()]||0)>=3,()=>Math.min(1,((S.qd||{})[today()]||0)/3)],[__t("play_blitz_or_pair_match"),'bolt',()=>S.qb===today(),()=>S.qb===today()?1:0]];
-function questSheet(){S.qc=S.qc||{};ovl(`<p class="sub" style="text-align:center">${__t("fresh_quests_every_day_3_gems")}</p><div style="display:grid;gap:0.625rem;margin-top:0.5rem">${DQ.map((q,i)=>{const done=q[2](),key=today()+'_'+i,got=S.qc[key];return`<div style="border-radius:1.25rem;border:0.125rem solid var(--line);background:var(--card);padding:0.875rem"><div style="display:flex;align-items:center;gap:0.75rem"><span style="width:2.875rem;height:2.875rem;border-radius:0.875rem;background:${done?'#2fc46f':'var(--line)'};color:${done?'#fff':'var(--mut)'};display:grid;place-items:center;flex:none">${ic(q[1],26)}</span><b style="flex:1">${q[0]}</b>${done&&!got?`<button class="btn" style="padding:0.5rem 0.875rem;width:auto" onclick="questClaim(${i})">${ic('gift',18)} 3</button>`:got?ic('check',26):''}</div><div style="height:0.5rem;border-radius:0.5rem;background:var(--line);margin-top:0.625rem;overflow:hidden"><div style="height:100%;width:${q[3]()*100}%;background:#2fc46f"></div></div></div>`}).join('')}</div>`,__t("daily_quests_2"))}
+function questSheet(){S.qc=S.qc||{};ovl(`<p class="sub" style="text-align:center">${__t("fresh_quests_every_day_3_gems")}</p><div style="display:grid;gap:0.875rem;margin-top:1rem">${DQ.map((q,i)=>{const done=q[2](),key=today()+'_'+i,got=S.qc[key];return`<div style="border-radius:1.25rem;border:0.125rem solid var(--line);background:var(--card);padding:1rem"><div style="display:flex;align-items:center;gap:0.75rem"><span style="width:2.875rem;height:2.875rem;border-radius:0.875rem;background:${done?'#2fc46f':'var(--line)'};color:${done?'#fff':'var(--mut)'};display:grid;place-items:center;flex:none">${ic(q[1],26)}</span><b style="flex:1">${q[0]}</b>${done&&!got?`<button class="btn" style="padding:0.5rem 0.875rem;width:auto" onclick="questClaim(${i})">${ic('gift',18)} 3</button>`:got?ic('check',26):''}</div><div style="height:0.5rem;border-radius:0.5rem;background:var(--line);margin-top:0.625rem;overflow:hidden"><div style="height:100%;width:${q[3]()*100}%;background:#2fc46f"></div></div></div>`}).join('')}</div>`,__t("daily_quests_2"))}
 function questClaim(i){const k=today()+'_'+i;if(S.qc[k])return;S.qc[k]=1;S.gems+=3;S.qn=(S.qn||0)+1;if([0,1,2].every(j=>S.qc[today()+'_'+j])){S.gems+=5;toast(__t("all_quests_5_bonus_gems"),'gift')}else toast(__t("3_gems"),'gift');save();checkBadges();questSheet()}
 function questDot(){try{return DQ.some((q,i)=>q[2]()&&!(S.qc||{})[today()+'_'+i])}catch(e){return 0}}
 BADGES.push(['rt1','sunrise',__t("early_bird"),()=>(S.rtn||0)>=1],['rf1','sunrise',__t("reflexive"),()=>(S.rfl||0)>=1],['pm1','layout-grid-add',__t("pair_matcher"),()=>(S.pmn||0)>=1],['pm8','layout-grid-add',__t("sharp_memory_8_moves_or_less"),()=>S.pmb&&S.pmb<=8],['qn3','gift',__t("quest_hunter"),()=>(S.qn||0)>=3],['qn15','gift',__t("quest_champion"),()=>(S.qn||0)>=15]);
@@ -4734,7 +4734,7 @@ body .bub small{opacity:1!important;font-weight:700}
 body .bub.l small{color:var(--mut)!important}
 body .bub.r small{color:rgba(255,255,255,.92)!important}
 body .scn small,body .stat small,body .unit small{color:rgba(255,255,255,.95)!important;opacity:1!important}
-body .scn{text-shadow:0 1px 2px rgba(0,0,0,.28)}
+body .scn{text-shadow:none}
 </style>
 <script type="text/plain" data-parlo-app id="dk-js">
 /* back buttons: activate from the pointer position, even if something invisible sits on top of the button */
@@ -4896,6 +4896,8 @@ html[dir="rtl"] input[type="search"],html[dir="rtl"] input[placeholder]{text-ali
 .pl-link{margin:.5rem 0!important}
 .pl-list{gap:.625rem}
 .sw{gap:.5rem;flex-wrap:wrap}
+.v194-shortcuts{flex-wrap:wrap!important;overflow:visible!important}
+.v194-shortcuts>*{flex:1 1 auto;justify-content:center}
 </style>
 <script type="text/plain" data-parlo-app id="course-chip-js">
 /* Course chip: flag plus course code and current level (for example IT · A1). It opens the course switcher. */
